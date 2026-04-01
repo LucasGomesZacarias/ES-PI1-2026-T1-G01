@@ -1,17 +1,21 @@
 import os
-def editar_eleitor():
-    print (f"==========================================\nEditar Eleitor")
+from gerenciamento.editarEleitor import editar
+
 
 def listar_eleitor():
+    os.system ("cls")
     print (f"==========================================\nListar Eleitor")
 
 def cadastrar_eleitor():
+    os.system ("cls")
     print (f"==========================================\nCadastrar Eleitor")
 
 def deletar_eleitor():
+    os.system ("cls")
     print (f"==========================================\nDeletar Eleitor")
 
 def menu_principal():
+    os.system ("cls")
     op = int(input(f"==========================================\nMenu\n\n1.0 Gerenciamento\n2.0 Votação\n\nEscolha sua opção:"))
     if op ==1:
         os.system ("cls")
@@ -20,19 +24,14 @@ def menu_principal():
             os.system ("cls")
             gerele = int(input(f"==========================================\nMenu Gerenciamento de Eleitores\n\n1.0 Editar Eleitor\n2.0 Listar Eleitores\n3.0 Cadastrar Eleitor\n4.0 Deletar Eleitor\n5.0 Voltar ao Menu Principal\n\nEscolha sua opção:"))
             if gerele == 1:
-                os.system ("cls")
-                editar_eleitor()
+                editar()
             if gerele == 2:
-                os.system ("cls")
                 listar_eleitor()
             if gerele == 3:
-                os.system ("cls")
                 cadastrar_eleitor()
             if gerele == 4:
-                os.system ("cls")
                 deletar_eleitor()
             if gerele == 5:
-                os.system ("cls")
                 menu_principal()
         elif ger ==2:
             os.system ("cls")
