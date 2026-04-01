@@ -1,0 +1,3 @@
+import votacao_menu_principal
+
+votacao_menu_principal.votacao_menu_principal()
