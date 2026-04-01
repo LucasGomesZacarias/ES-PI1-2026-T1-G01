@@ -19,18 +19,18 @@ O sistema simula um processo eleitoral completo, sendo responsável por:
 
 
 Integrantes 
-. Augusto Henrique Marçura 
-. Felipe Evangelista Cruz 
-. Gabriel Grigoletto Ribas 
-. Lucas Gomes Zacarias 
-. Luiz Felipe da Conceição 
+- Augusto Henrique Marçura
+- Felipe Evangelista Cruz 
+- Gabriel Grigoletto Ribas 
+- Lucas Gomes Zacarias 
+- Luiz Felipe da Conceição 
 
 Tecnologias Utilizadas 
-. Python 3.x 
-. MySQL 
-. Biblioteca mysql.connector 
-. Biblioteca datetime
-. Git e GitHub 
+- Python 3.x 
+- MySQL 
+- Biblioteca mysql.connector 
+- Biblioteca datetime
+- Git e GitHub 
 
 Instruções para Execução do Sistema 
 1. Clonar o repositório
