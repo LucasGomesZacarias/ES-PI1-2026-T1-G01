@@ -1,7 +1,7 @@
 import os
 from gerenciamento.editarEleitor import editar
 
-
+# separar submenus e munu principal em arquivos diferentes, para não ficar tão grande e confuso.
 def listar_eleitor():
     os.system ("cls")
     print (f"==========================================\nListar Eleitor")
@@ -38,12 +38,3 @@ def menu_principal():
             menu_principal()
 
 menu_principal()
-
-
-
-'''
-case 2:
-os.system ("cls")
-print (f"==========================================\nVotação")
-
-'''
