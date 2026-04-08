@@ -1,5 +1,6 @@
 import os
 import time
+from menus import menu_gerenciamento
 
 def editar():
     os.system ("cls")
