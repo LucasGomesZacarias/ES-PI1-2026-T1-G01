@@ -1,6 +1,6 @@
 import os
 import time
-import votacao_submenus
+from votacao import votacao_submenus
 
 def votacao_menu_principal():
     opcao=0

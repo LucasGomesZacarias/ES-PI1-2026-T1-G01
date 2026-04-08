@@ -1,4 +1,4 @@
-import votacao_menu_principal
+from votacao import votacao_menu_principal
 import os
 import time
 
