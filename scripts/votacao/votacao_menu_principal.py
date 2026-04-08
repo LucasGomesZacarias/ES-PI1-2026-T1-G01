@@ -1,6 +1,7 @@
 import os
 import time
 from votacao import votacao_submenus
+from gerenciamento import menus
 
 def votacao_menu_principal():
     opcao=0
@@ -21,7 +22,7 @@ def votacao_menu_principal():
                     pass
                 case 4:
                     os.system('cls')
-                    pass
+                    menus.menu_principal()
                 case _:
                     os.system('cls')
                     print('==========================================\nOpção inválida\nvoltando.')
