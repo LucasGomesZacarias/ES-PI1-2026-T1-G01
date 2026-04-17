@@ -5,10 +5,11 @@ from votacao import votacao_menu_principal
 # separar submenus e munu principal em arquivos diferentes, para não ficar tão grande e confuso.
 
 def menu_principal():
+    op = 0 
     os.system ("cls")
-    while rodar==0:
+    while op !=3:
         try:
-            op = int(input(f"==========================================\nMenu\n\n1.0 Gerenciamento\n2.0 Votação\n\nEscolha sua opção:"))
+            op = int(input(f"==========================================\nMenu\n\n1.0 Gerenciamento\n2.0 Votação\n3.0 Encerrar sistema\n\nEscolha sua opção:"))
             match op:
                 case 1:
                     os.system ("cls")
@@ -32,6 +33,21 @@ def menu_principal():
                 case 2:
                     os.system('cls')
                     votacao_menu_principal.votacao_menu_principal()
+
+                case 3:
+                    os.system('cls')
+                    print('==========================================\n                 Saindo.\n==========================================')
+                    time.sleep(1)
+                    os.system('cls')
+                    print('==========================================\n                 Saindo..\n==========================================')
+                    time.sleep(1)
+                    os.system('cls')
+                    print('==========================================\n                 Saindo...\n==========================================')
+                    time.sleep(1)
+                    os.system('cls')
+                    exit()
+
+
                 case _:
                     os.system('cls')
                     print('==========================================\nOpção inválida\nvoltando.')
@@ -81,7 +97,5 @@ def menu_gerenciamento():
             print('==========================================\nOpção inválida\nvoltando...')
             time.sleep(1)
             os.system('cls')
-
-rodar=0
 
 menu_principal()

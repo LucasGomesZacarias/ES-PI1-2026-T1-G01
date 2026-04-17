@@ -12,7 +12,16 @@ def listar_eleitor():
 
 def cadastrar_eleitor():
     os.system ("cls")
-    print (f"==========================================\nCadastrar Eleitor")
+    nome = input(f"==========================================\nCadastrar Eleitor\n\nNome: ")
+    titulo = input(f"Titulo de Eleitor: ")
+    cpf = int(input(f"CFP do Eleitor: "))
+    mesario = input (f'Mesário? (Sim ou Não): ').upper()
+    if mesario == 'SIM':
+        mesario =1
+    else:
+        mesario = 0 
+    
+
 
 def deletar_eleitor():
     os.system ("cls")
