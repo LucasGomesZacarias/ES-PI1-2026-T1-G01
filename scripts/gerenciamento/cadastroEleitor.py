@@ -2,8 +2,9 @@ import os
 import time
 import random 
 import validacaoDeCpf
+import criptografia
 
-#Essa função funciona perfeitamente, falta fazer a conexão entre a criptografia e ela. Está ocorrendo erros na conexão entre a criptografia e o cadastro. Favor revisar criptografia no ato da conexão.
+
 def cadastrar_eleitor():
     os.system ("cls")
 
@@ -47,11 +48,11 @@ def cadastrar_eleitor():
 
             
 
-    titulo = input(f"Titulo de Eleitor: ")
+    titulo_eleitor = input(f"Titulo de Eleitor: ")
 
 
     #tratamento de erro titulo
-    if len(titulo) != 12:
+    if len(titulo_eleitor) != 12:
         os.system('cls')
         print (f"==========================================\nErro: Título deve conter exatos 12 números!\n==========================================")
         time.sleep(2)
@@ -69,7 +70,7 @@ def cadastrar_eleitor():
         return
     
     try:
-        int(titulo)
+        int(titulo_eleitor)
     except ValueError:
         os.system('cls')
         print (f"==========================================\nErro: Título deve conter apenas números!\n==========================================")
@@ -155,3 +156,8 @@ def cadastrar_eleitor():
         cadastrar_eleitor()
         return
 
+    criptografia_cpf=criptografia.criptografia(cpf, titulo_eleitor)[0]#sempre puxar assim nos outros arquivos [0]=cpf [1]=tiutlo de eleitor
+    criptografia_TE=criptografia.criptografia(cpf, titulo_eleitor)[1]
+
+    descriptografia_cpf=criptografia.descriptografia(criptografia_cpf, criptografia_TE)[0]
+    descriptografia_TE=criptografia.descriptografia(criptografia_cpf, criptografia_TE)[1]

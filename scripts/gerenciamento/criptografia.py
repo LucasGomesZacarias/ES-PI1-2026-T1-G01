@@ -208,7 +208,7 @@ def descriptografia(cpf, titulo_eleitor):
 
 
 
-cpf=input('digite cpf: ')
+'''cpf=input('digite cpf: ')
 titulo_eleitor=input('digite titlo eleitor: ')
 
 criptografia_cpf=criptografia(cpf, titulo_eleitor)[0]#sempre puxar assim nos outros arquivos [0]=cpf [1]=tiutlo de eleitor
@@ -217,4 +217,4 @@ criptografia_TE=criptografia(cpf, titulo_eleitor)[1]
 descriptografia_cpf=descriptografia(criptografia_cpf, criptografia_TE)[0]
 descriptografia_TE=descriptografia(criptografia_cpf, criptografia_TE)[1]
 
-print(criptografia_cpf, descriptografia_cpf, criptografia_TE, descriptografia_TE)
+print(criptografia_cpf, descriptografia_cpf, criptografia_TE, descriptografia_TE)'''
