@@ -1,12 +1,21 @@
 import os
 import time
-import random 
+import random
+import mysql.connector
 import validacaoDeCpf
 import criptografia
 
 
 def cadastrar_eleitor():
     os.system ("cls")
+
+    conexao = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='Augusto0609@',
+        database='banco_dados_pi'
+    )
+    cursor = conexao.cursor()
 
     nome = input(f"==========================================\nCadastrar Eleitor\n\nNome: ")
     
@@ -132,7 +141,49 @@ def cadastrar_eleitor():
        print (f"==========================================\nErro: CPF INVALIDO !\n==========================================")
        time.sleep(2)
        cadastrar_eleitor()
-       return    
+       return
+
+    # criptografia precisa do cpf e do titulo juntos por isso as duas verificações de duplicado fica aqui
+    criptografia_cpf = criptografia.criptografia(cpf, titulo_eleitor)[0]
+    cursor.execute("SELECT * FROM eleitores WHERE cpf = %s", (criptografia_cpf,))
+    if cursor.fetchone():
+        os.system('cls')
+        print("==========================================\nErro: CPF já cadastrado!\n==========================================")
+        time.sleep(2)
+        os.system('cls')
+        print('==========================================\n\nvoltando.')
+        time.sleep(1)
+        os.system('cls')
+        print('==========================================\n\nvoltando..')
+        time.sleep(1)
+        os.system('cls')
+        print('==========================================\n\nvoltando...')
+        time.sleep(1)
+        os.system('cls')
+        cadastrar_eleitor()
+        return
+
+    criptografia_TE = criptografia.criptografia(cpf, titulo_eleitor)[1]
+    cursor.execute("SELECT * FROM eleitores WHERE titulo_de_eleitor = %s", (criptografia_TE,))
+    if cursor.fetchone():
+        os.system('cls')
+        print("==========================================\nErro: Título de Eleitor já cadastrado!\n==========================================")
+        time.sleep(2)
+        os.system('cls')
+        print('==========================================\n\nvoltando.')
+        time.sleep(1)
+        os.system('cls')
+        print('==========================================\n\nvoltando..')
+        time.sleep(1)
+        os.system('cls')
+        print('==========================================\n\nvoltando...')
+        time.sleep(1)
+        os.system('cls')
+        cadastrar_eleitor()
+        return
+
+
+    
 
     mesario = input (f'Mesário? (Sim ou Não): ').upper()
     if mesario == 'SIM':
@@ -156,8 +207,3 @@ def cadastrar_eleitor():
         cadastrar_eleitor()
         return
 
-    criptografia_cpf=criptografia.criptografia(cpf, titulo_eleitor)[0]#sempre puxar assim nos outros arquivos [0]=cpf [1]=tiutlo de eleitor
-    criptografia_TE=criptografia.criptografia(cpf, titulo_eleitor)[1]
-
-    descriptografia_cpf=criptografia.descriptografia(criptografia_cpf, criptografia_TE)[0]
-    descriptografia_TE=criptografia.descriptografia(criptografia_cpf, criptografia_TE)[1]
