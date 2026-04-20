@@ -9,7 +9,7 @@ from gerenciamento import menus
 
 def cadastrar_eleitor():
     os.system ("cls")
-
+    #Conexão BD
     conexao = mysql.connector.connect(
         host='localhost',
         user='root',
@@ -17,10 +17,10 @@ def cadastrar_eleitor():
         database='banco_dados_pi'
     )
     cursor = conexao.cursor()
-
+    #input nome
     nome = input(f"==========================================\nCadastrar Eleitor\n\nNome: ")
     
-    
+    #tratamento de erro para nome vázio
     if nome is None or nome == "":
         os.system('cls')
         print (f"==========================================\nErro: o nome não pode ser vazio\n==========================================")
@@ -37,7 +37,7 @@ def cadastrar_eleitor():
         os.system('cls')
         cadastrar_eleitor()
         return
-    
+    #tratamento de erro para nome com número
     for caractere in nome:
         if caractere in "0123456789":
             os.system('cls')
@@ -57,11 +57,11 @@ def cadastrar_eleitor():
             return
 
             
-
+    #input título 
     titulo_eleitor = input(f"Titulo de Eleitor: ")
 
 
-    #tratamento de erro titulo
+    #tratamento de erro titulo maior ou menor q 12 letras
     if len(titulo_eleitor) != 12:
         os.system('cls')
         print (f"==========================================\nErro: Título deve conter exatos 12 números!\n==========================================")
@@ -78,7 +78,7 @@ def cadastrar_eleitor():
         os.system('cls')
         cadastrar_eleitor()
         return
-    
+    #tratamento de erro para titulo com letras
     try:
         int(titulo_eleitor)
     except ValueError:
@@ -97,16 +97,16 @@ def cadastrar_eleitor():
         os.system('cls')
         cadastrar_eleitor()
         return
-    
+    #validacao de titulo
     if not validacao_titulo.validacaoTitulo(titulo_eleitor):
         os.system('cls')
         print (f"==========================================\nErro: TÍTULO INVALIDO !\n==========================================")
         time.sleep(2)
         cadastrar_eleitor()
         return
-
+    #input cpf
     cpf = (input(f"CPF do Eleitor: "))
-    
+    #tratamento de erro cpf maior ou menor q 11 digitos
     if len(cpf) != 11:
         os.system('cls')
         print (f"==========================================\nErro: CPF deve conter exatos 11 números!\n==========================================")
@@ -123,7 +123,7 @@ def cadastrar_eleitor():
         os.system('cls')
         cadastrar_eleitor()
         return
-
+    #tratamento de erro para letras no cpf
     try:
         int(cpf)
     except ValueError:
@@ -142,7 +142,7 @@ def cadastrar_eleitor():
         os.system('cls')
         cadastrar_eleitor()
         return
-    
+    #validação cpf
     if not validacaoDeCpf.validaCpf(cpf):
        os.system('cls')
        print (f"==========================================\nErro: CPF INVALIDO !\n==========================================")
@@ -191,13 +191,13 @@ def cadastrar_eleitor():
 
 
     
-
-    mesario = input (f'Mesário? (Sim ou Não): ').upper()
+    #input mesario
+    mesario = input (f'Mesário? (Sim ou Não): ').upper() #upper pra deixar respostas tudo em maiusculo para o tratamento de erro a seguir
     if mesario == 'SIM':
-        mesario =1
+        mesario =1 #1 é verdadeiro no BD
     elif mesario == 'NÃO':
-        mesario = 0
-    else:
+        mesario = 0 #2 é falso no BD
+    else:  #tratamento de erro para qualquer outra coisa sem ser sim ou nao
         os.system('cls')
         print (f"==========================================\nErro: A resposta deve ser apenas sim ou não!\n==========================================")
         time.sleep(2)
@@ -214,15 +214,15 @@ def cadastrar_eleitor():
         cadastrar_eleitor()
         return
 
-    partes_nome = nome.split()
+    partes_nome = nome.split() #divide o nome para pegar partes dele para criar a chave
     chave_de_acesso = partes_nome[0][:2].upper() + partes_nome[1][0].upper() + str(random.randint(1000, 9999))
-
+    #insert no BD
     sql = "INSERT INTO eleitores (nome, cpf, titulo_de_eleitor, mesario, chave_de_acesso) VALUES (%s, %s, %s, %s, %s)"
     cursor.execute(sql, (nome, criptografia_cpf, criptografia_TE, mesario, chave_de_acesso))
     conexao.commit()
     cursor.close()
     conexao.close()
-
+    #mensagem final 
     os.system('cls')
     print(f'==========================================\nEleitor cadastrado com sucesso!\n\nChave de acesso: {chave_de_acesso}\n\n==========================================')
     time.sleep(3)
