@@ -5,6 +5,7 @@ import mysql.connector
 import validacaoDeCpf
 import criptografia
 import validacao_titulo
+import menus
 
 def cadastrar_eleitor():
     os.system ("cls")
@@ -195,7 +196,7 @@ def cadastrar_eleitor():
     if mesario == 'SIM':
         mesario =1
     elif mesario == 'NÃO':
-        mesario = 0 
+        mesario = 0
     else:
         os.system('cls')
         print (f"==========================================\nErro: A resposta deve ser apenas sim ou não!\n==========================================")
@@ -213,3 +214,17 @@ def cadastrar_eleitor():
         cadastrar_eleitor()
         return
 
+    partes_nome = nome.split()
+    chave_de_acesso = partes_nome[0][:2].upper() + partes_nome[1][0].upper() + str(random.randint(1000, 9999))
+
+    sql = "INSERT INTO eleitores (nome, cpf, titulo_de_eleitor, mesario, chave_de_acesso) VALUES (%s, %s, %s, %s, %s)"
+    cursor.execute(sql, (nome, criptografia_cpf, criptografia_TE, mesario, chave_de_acesso))
+    conexao.commit()
+    cursor.close()
+    conexao.close()
+
+    os.system('cls')
+    print(f'==========================================\nEleitor cadastrado com sucesso!\n\nChave de acesso: {chave_de_acesso}\n\n==========================================')
+    time.sleep(3)
+    os.system('cls')
+    menus.menu_gerenciamento()
