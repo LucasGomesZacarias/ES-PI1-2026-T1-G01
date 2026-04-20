@@ -81,17 +81,19 @@ def menu_principal():
 
 def menu_gerenciamento():
     os.system ("cls")
-    gerele = int(input(f"==========================================\nMenu Gerenciamento de Eleitores\n\n1.0 Editar Eleitor\n2.0 Listar Eleitores\n3.0 Cadastrar Eleitor\n4.0 Deletar Eleitor\n5.0 Voltar ao Menu Principal\n\nEscolha sua opção:"))
+    gerele = int(input(f"==========================================\nMenu Gerenciamento de Eleitores\n\n1.0 Editar Eleitor\n2.0 Listar Eleitores\n3.0 Cadastrar Eleitor\n4.0 Deletar Eleitor\n5.0 Buscar Eleitor\n6.0 Voltar ao Menu Principal\n\nEscolha sua opção:"))
     match gerele:
         case 1:
             editarEleitor.editar()
         case 2:
-            editarEleitor.listar_eleitor()
+            listarEleitor.listar_eleitor()
         case 3:
-            editarEleitor.cadastrar_eleitor()
+            cadastroEleitor.cadastrar_eleitor()
         case 4:
-            editarEleitor.deletar_eleitor()
+            deletarEleitor.deletar_eleitor()
         case 5:
+            buscarEleitor.buscar_eleitor()
+        case 6:
             menu_principal()
         case _:
             os.system('cls')

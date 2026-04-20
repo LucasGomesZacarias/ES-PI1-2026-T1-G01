@@ -4,7 +4,7 @@ import random
 import mysql.connector
 import validacaoDeCpf
 import criptografia
-
+import validacao_titulo
 
 def cadastrar_eleitor():
     os.system ("cls")
@@ -96,7 +96,13 @@ def cadastrar_eleitor():
         os.system('cls')
         cadastrar_eleitor()
         return
-
+    
+    if not validacao_titulo.validacaoTitulo(titulo_eleitor):
+        os.system('cls')
+        print (f"==========================================\nErro: TÍTULO INVALIDO !\n==========================================")
+        time.sleep(2)
+        cadastrar_eleitor()
+        return
 
     cpf = (input(f"CPF do Eleitor: "))
     
