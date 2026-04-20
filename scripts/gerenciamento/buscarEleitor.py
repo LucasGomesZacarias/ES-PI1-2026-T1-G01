@@ -1,6 +1,8 @@
 import os
 import time
 import random 
+import mysql.connector
+from gerenciamento import criptografia
 
 def buscar_eleitor(conexao):
     os.system ("cls")
