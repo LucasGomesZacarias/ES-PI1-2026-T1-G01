@@ -2,10 +2,6 @@ import os
 from gerenciamento import editarEleitor
 import time
 from votacao import votacao_menu_principal
-<<<<<<< HEAD
-=======
-
->>>>>>> da36a839f87ca7eb617ed6ac60b8f195aa09d7b2
 from gerenciamento import buscarEleitor
 from gerenciamento import cadastroEleitor
 from gerenciamento import deletarEleitor
