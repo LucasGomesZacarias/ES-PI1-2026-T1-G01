@@ -10,98 +10,102 @@ def criptografia(cpf, titulo_eleitor):
     
 
     #Criptograrfia CPF
+    if cpf != None:
+        cpf=str(cpf)
+        
+        cpf=cpf+cpf[-1:]#dupllica o último caractere do cpf
+        
 
-    cpf=str(cpf)
-    
-    cpf=cpf+cpf[-1:]#dupllica o último caractere do cpf
-    
+        
+        matriz_cpf=[]
+        
+        
+        for par in range(0, len(cpf), 2): #le cpf do começo formando pares de 2
+            par=list(cpf[par:par+2])
+            par_indices=[]#auxilia a guardar os valores dos pares na tabela a26
+            for num in par:
+                posicao=tabela.index(str(num)) # Acha a posição na tabela
+                par_indices.append(posicao)  
+            matriz_cpf.append(par_indices) 
 
-    
-    matriz_cpf=[]
-    
-    
-    for par in range(0, len(cpf), 2): #le cpf do começo formando pares de 2
-        par=list(cpf[par:par+2])
-        par_indices=[]#auxilia a guardar os valores dos pares na tabela a26
-        for num in par:
-            posicao=tabela.index(str(num)) # Acha a posição na tabela
-            par_indices.append(posicao)  
-        matriz_cpf.append(par_indices) 
-
-    
-
-
-    multiplicacao = [[0] * len(matriz_chave) for vazio in range(len(matriz_cpf))]#cria uma matriz baseada nas outras e zera
-    
-
-    for col in range(len(matriz_cpf)):#percorre a matriz do cpf
-        for linha in range(len(matriz_chave)):#percorre a matriz chave
-            for k in range(len(matriz_chave[0])):#define o tamanho da matriz chave(garante o produto escalar)
-                multiplicacao[col][linha] += matriz_chave[linha][k] * int(matriz_cpf[col][k])#multiplica linha por coluna e somma para todos os valores
-
-    
-    
-    for col in range(len(multiplicacao)):#perocrre a matriz
-        for linha in range(2):#separa os pares
-            multiplicacao[col][linha]=multiplicacao[col][linha]%36
-
-    
-
-    texto_cifrado=[]
-    for col in range(len(multiplicacao)):
-        texto_cifrado.append(multiplicacao[col][0])
-        texto_cifrado.append(multiplicacao[col][1])#transforma a matriz em um única lista
-
-    
-    criptografia_cpf=''
-    for num in texto_cifrado:
-        criptografia_cpf+=str(tabela[num])#adiciona todos os caracteres em uma única string
+        
 
 
+        multiplicacao = [[0] * len(matriz_chave) for vazio in range(len(matriz_cpf))]#cria uma matriz baseada nas outras e zera
+        
 
-    #Criptografia título de eleitor
+        for col in range(len(matriz_cpf)):#percorre a matriz do cpf
+            for linha in range(len(matriz_chave)):#percorre a matriz chave
+                for k in range(len(matriz_chave[0])):#define o tamanho da matriz chave(garante o produto escalar)
+                    multiplicacao[col][linha] += matriz_chave[linha][k] * int(matriz_cpf[col][k])#multiplica linha por coluna e somma para todos os valores
 
-    titulo_eleitor=str(titulo_eleitor)
+        
+        
+        for col in range(len(multiplicacao)):#perocrre a matriz
+            for linha in range(2):#separa os pares
+                multiplicacao[col][linha]=multiplicacao[col][linha]%36
 
-    titulo_eleitor_matriz=[]
+        
 
-    for par in range(0, len(titulo_eleitor), 2): #le cpf do começo formando pares de 2
-        par=list(titulo_eleitor[par:par+2])
-        par_indices=[]#auxilia a guardar os valores dos pares na tabela a26
-        for num in par:
-            posicao=tabela.index(str(num)) # Acha a posição na tabela
-            par_indices.append(posicao) 
-        titulo_eleitor_matriz.append(par_indices) 
+        texto_cifrado=[]
+        for col in range(len(multiplicacao)):
+            texto_cifrado.append(multiplicacao[col][0])
+            texto_cifrado.append(multiplicacao[col][1])#transforma a matriz em um única lista
 
-    
-
-
-    multiplicacao = [[0] * len(matriz_chave) for _ in range(len(titulo_eleitor_matriz))]#cria uma matriz baseada nas outras e zera
-    
-
-    for col in range(len(titulo_eleitor_matriz)):#percorre a matriz do cpf
-        for linha in range(len(matriz_chave)):#percorre a matriz chave
-            for k in range(len(matriz_chave[0])):#define o tamanho da matriz chave(garante o produto escalar)
-                multiplicacao[col][linha] += matriz_chave[linha][k] * int(titulo_eleitor_matriz[col][k])#multiplica linha por coluna e somma para todos os valores
-
-    
-    for col in range(len(multiplicacao)):
-        for linha in range(2):
-            multiplicacao[col][linha]=multiplicacao[col][linha]%36
-
-    
-
-    texto_cifrado=[]
-    for col in range(len(multiplicacao)):#percorre toda a matriz e adiciona tudo em uma lista única
-        texto_cifrado.append(multiplicacao[col][0])
-        texto_cifrado.append(multiplicacao[col][1])
-    
-    criptografia_titulo_eleitor=''
-    for num in texto_cifrado:
-        criptografia_titulo_eleitor+=str(tabela[num])
+        
+        criptografia_cpf=''
+        for num in texto_cifrado:
+            criptografia_cpf+=str(tabela[num])#adiciona todos os caracteres em uma única string
+        return criptografia_cpf
+    else:
 
 
-    return criptografia_cpf, criptografia_titulo_eleitor
+
+        #Criptografia título de eleitor
+        if titulo_eleitor != None:
+            titulo_eleitor=str(titulo_eleitor)
+
+            titulo_eleitor_matriz=[]
+
+            for par in range(0, len(titulo_eleitor), 2): #le cpf do começo formando pares de 2
+                par=list(titulo_eleitor[par:par+2])
+                par_indices=[]#auxilia a guardar os valores dos pares na tabela a26
+                for num in par:
+                    posicao=tabela.index(str(num)) # Acha a posição na tabela
+                    par_indices.append(posicao) 
+                titulo_eleitor_matriz.append(par_indices) 
+
+            
+
+
+            multiplicacao = [[0] * len(matriz_chave) for _ in range(len(titulo_eleitor_matriz))]#cria uma matriz baseada nas outras e zera
+            
+
+            for col in range(len(titulo_eleitor_matriz)):#percorre a matriz do cpf
+                for linha in range(len(matriz_chave)):#percorre a matriz chave
+                    for k in range(len(matriz_chave[0])):#define o tamanho da matriz chave(garante o produto escalar)
+                        multiplicacao[col][linha] += matriz_chave[linha][k] * int(titulo_eleitor_matriz[col][k])#multiplica linha por coluna e somma para todos os valores
+
+            
+            for col in range(len(multiplicacao)):
+                for linha in range(2):
+                    multiplicacao[col][linha]=multiplicacao[col][linha]%36
+
+            
+
+            texto_cifrado=[]
+            for col in range(len(multiplicacao)):#percorre toda a matriz e adiciona tudo em uma lista única
+                texto_cifrado.append(multiplicacao[col][0])
+                texto_cifrado.append(multiplicacao[col][1])
+            
+            criptografia_titulo_eleitor=''
+            for num in texto_cifrado:
+                criptografia_titulo_eleitor+=str(tabela[num])
+
+
+            return criptografia_titulo_eleitor
+        else:
+            return criptografia_cpf, criptografia_titulo_eleitor
 
 
 

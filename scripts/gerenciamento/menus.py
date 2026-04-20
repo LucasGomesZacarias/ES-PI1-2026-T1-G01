@@ -2,12 +2,11 @@ import os
 from gerenciamento import editarEleitor
 import time
 from votacao import votacao_menu_principal
-
-import buscarEleitor
-import cadastroEleitor
-import deletarEleitor
-import editarEleitor
-import listarEleitor
+from gerenciamento import buscarEleitor
+from gerenciamento import cadastroEleitor
+from gerenciamento import deletarEleitor
+from gerenciamento import editarEleitor
+from gerenciamento import listarEleitor
 
 # separar submenus e munu principal em arquivos diferentes, para não ficar tão grande e confuso.
 

@@ -1,15 +1,28 @@
 import os
 import time
 import random 
+import mysql.connector
+from gerenciamento import criptografia
 
-def buscar_eleitor(conexao):
+def buscar_eleitor():
+    conexao = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='Augusto0609@',
+        database='banco_dados_pi'
+    )
     os.system ("cls")
-    cursor=conexao.cursor()
-    valor= input("Digite o CPF ou ti­tulo de eleitor: ")
+    cursor = conexao.cursor(dictionary=True)
+    valor = input("Digite o CPF ou ti­tulo de eleitor: ")
+    if len(valor) == 11:
+              valor = criptografia.criptografia(valor, titulo_eleitor=None)
+    elif len(valor) == 12:  
+              valor = criptografia.criptografia(None, valor)
     busca = "SELECT * FROM eleitores WHERE cpf = %s OR titulo_de_eleitor = %s"
     cursor.execute(busca, (valor, valor))
     resultado = cursor.fetchone()
     if resultado:
-        print(f"=========Eleitor==========\nID: {resultado['id_eleitores']}\nNome: {resultado['nome']}\nCPF: {resultado['cpf']}\nTitulo de eleitor: {resultado['titulo_de_eleitor']}\nMesario: {resultado['mesario']}\nChave de acesso: {resultado['chave_de_acesso']}\nConfirmaÃ§Ã£o de voto: {resultado['confirmacao_de_voto']}")
+        cpf_descriptografado, te_descriptografado = criptografia.descriptografia(resultado['cpf'], resultado['titulo_de_eleitor'])
+        print(f"=========Eleitor==========\nNome: {resultado['nome']}\nCPF: {cpf_descriptografado}\nTitulo de eleitor: {te_descriptografado}\nMesario: {resultado['mesario']}\nConfirmação de voto: {resultado['confirmacao_de_voto']}")
     else:
         print("Eleitor não encontrado")

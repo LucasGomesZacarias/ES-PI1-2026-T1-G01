@@ -2,10 +2,10 @@ import os
 import time
 import random
 import mysql.connector
-import validacaoDeCpf
-import criptografia
-import validacao_titulo
-import menus
+from gerenciamento import validacaoDeCpf
+from gerenciamento import criptografia
+from gerenciamento import validacao_titulo
+from gerenciamento import menus
 
 def cadastrar_eleitor():
     os.system ("cls")
@@ -151,7 +151,7 @@ def cadastrar_eleitor():
        return
 
     # criptografia precisa do cpf e do titulo juntos por isso as duas verificações de duplicado fica aqui
-    criptografia_cpf = criptografia.criptografia(cpf, titulo_eleitor)[0]
+    criptografia_cpf = criptografia.criptografia(cpf, None)
     cursor.execute("SELECT * FROM eleitores WHERE cpf = %s", (criptografia_cpf,))
     if cursor.fetchone():
         os.system('cls')
@@ -170,7 +170,7 @@ def cadastrar_eleitor():
         cadastrar_eleitor()
         return
 
-    criptografia_TE = criptografia.criptografia(cpf, titulo_eleitor)[1]
+    criptografia_TE = criptografia.criptografia(None, titulo_eleitor)
     cursor.execute("SELECT * FROM eleitores WHERE titulo_de_eleitor = %s", (criptografia_TE,))
     if cursor.fetchone():
         os.system('cls')
