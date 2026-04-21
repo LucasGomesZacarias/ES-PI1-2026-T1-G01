@@ -23,7 +23,24 @@ def cadastrar_eleitor():
     #tratamento de erro para nome vázio
     if nome is None or nome == "":
         os.system('cls')
-        print (f"==========================================\nErro: o nome não pode ser vazio\n==========================================")
+        print (f"==========================================\nErro: O nome não pode ser vazio\n==========================================")
+        time.sleep(2)
+        os.system('cls')
+        print('==========================================\n\nvoltando.')
+        time.sleep(1)
+        os.system('cls')
+        print('==========================================\n\nvoltando..')
+        time.sleep(1)
+        os.system('cls')
+        print('==========================================\n\nvoltando...')
+        time.sleep(1)
+        os.system('cls')
+        cadastrar_eleitor()
+        return
+    #tratamento de erro para nome incompleto
+    if len(nome.split()) < 2:
+        os.system('cls')
+        print (f"==========================================\nErro: Informe o nome completo!\n==========================================")
         time.sleep(2)
         os.system('cls')
         print('==========================================\n\nvoltando.')
@@ -41,7 +58,7 @@ def cadastrar_eleitor():
     for caractere in nome:
         if caractere in "0123456789":
             os.system('cls')
-            print (f"==========================================\nErro: o nome não pode conter números\n==========================================")
+            print (f"==========================================\nErro: O nome não pode conter números\n==========================================")
             time.sleep(2)
             os.system('cls')
             print('==========================================\n\nvoltando.')
