@@ -23,6 +23,8 @@ def menu_principal():
                     match ger:
                         case 1:
                             menu_gerenciamento()
+                        case 2:
+                            menu_principal()
                         case _:
                             os.system('cls')
                             print('==========================================\nOpção inválida\nvoltando.')

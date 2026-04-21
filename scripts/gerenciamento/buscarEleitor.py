@@ -22,7 +22,9 @@ def buscar_eleitor():
     cursor.execute(busca, (valor, valor))
     resultado = cursor.fetchone()
     if resultado:
+        os.system ("cls")
         cpf_descriptografado, te_descriptografado = criptografia.descriptografia(resultado['cpf'], resultado['titulo_de_eleitor'])
         print(f"=========Eleitor==========\nNome: {resultado['nome']}\nCPF: {cpf_descriptografado}\nTitulo de eleitor: {te_descriptografado}\nMesario: {resultado['mesario']}\nConfirmação de voto: {resultado['confirmacao_de_voto']}")
     else:
+        os.system ("cls")
         print("Eleitor não encontrado")

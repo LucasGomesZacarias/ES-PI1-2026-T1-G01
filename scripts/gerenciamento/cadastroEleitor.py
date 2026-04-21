@@ -19,7 +19,7 @@ def cadastrar_eleitor():
     cursor = conexao.cursor()
     #input nome
     nome = input(f"==========================================\nCadastrar Eleitor\n\nNome: ")
-    
+    #COLOCAR TRATAMENTO PARA NOME INCOMPLETO, É NECESSARIO ESCREVER PELO MENOS O PRIMEIRO E SEGUNDO NOME
     #tratamento de erro para nome vázio
     if nome is None or nome == "":
         os.system('cls')
@@ -60,6 +60,24 @@ def cadastrar_eleitor():
     #input título 
     titulo_eleitor = input(f"Titulo de Eleitor: ")
 
+    criptografia_TE = criptografia.criptografia(None, titulo_eleitor)
+    cursor.execute("SELECT * FROM eleitores WHERE titulo_de_eleitor = %s", (criptografia_TE,))
+    if cursor.fetchone():
+        os.system('cls')
+        print("==========================================\nErro: Título de Eleitor já cadastrado!\n==========================================")
+        time.sleep(2)
+        os.system('cls')
+        print('==========================================\n\nvoltando.')
+        time.sleep(1)
+        os.system('cls')
+        print('==========================================\n\nvoltando..')
+        time.sleep(1)
+        os.system('cls')
+        print('==========================================\n\nvoltando...')
+        time.sleep(1)
+        os.system('cls')
+        cadastrar_eleitor()
+        return
 
     #tratamento de erro titulo maior ou menor q 12 letras
     if len(titulo_eleitor) != 12:
@@ -170,24 +188,6 @@ def cadastrar_eleitor():
         cadastrar_eleitor()
         return
 
-    criptografia_TE = criptografia.criptografia(None, titulo_eleitor)
-    cursor.execute("SELECT * FROM eleitores WHERE titulo_de_eleitor = %s", (criptografia_TE,))
-    if cursor.fetchone():
-        os.system('cls')
-        print("==========================================\nErro: Título de Eleitor já cadastrado!\n==========================================")
-        time.sleep(2)
-        os.system('cls')
-        print('==========================================\n\nvoltando.')
-        time.sleep(1)
-        os.system('cls')
-        print('==========================================\n\nvoltando..')
-        time.sleep(1)
-        os.system('cls')
-        print('==========================================\n\nvoltando...')
-        time.sleep(1)
-        os.system('cls')
-        cadastrar_eleitor()
-        return
 
 
     
@@ -195,7 +195,7 @@ def cadastrar_eleitor():
     mesario = input (f'Mesário? (Sim ou Não): ').upper() #upper pra deixar respostas tudo em maiusculo para o tratamento de erro a seguir
     if mesario == 'SIM':
         mesario =1 #1 é verdadeiro no BD
-    elif mesario == 'NÃO':
+    elif mesario == 'NÃO' or mesario == 'NAO':
         mesario = 0 #2 é falso no BD
     else:  #tratamento de erro para qualquer outra coisa sem ser sim ou nao
         os.system('cls')
