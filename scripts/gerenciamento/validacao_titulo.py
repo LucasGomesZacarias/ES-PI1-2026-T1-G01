@@ -1,44 +1,10 @@
-def validacaoTitulo(titulo):
-    if len(titulo) != 12:
-        return False
-    else:
-        digitos_validos = '0123456789'
-        titulo_valido = True
-    if titulo[0] not in digitos_validos:
-        titulo_valido = False
-    elif titulo[1] not in digitos_validos:
-        titulo_valido = False
-    elif titulo[2] not in digitos_validos:
-        titulo_valido = False
-    elif titulo[3] not in digitos_validos:
-        titulo_valido = False
-    elif titulo[4] not in digitos_validos:
-        titulo_valido = False
-    elif titulo[5] not in digitos_validos:
-        titulo_valido = False
-    elif titulo[6] not in digitos_validos:
-        titulo_valido = False
-    elif titulo[7] not in digitos_validos:
-        titulo_valido = False
-    elif titulo[8] not in digitos_validos:
-        titulo_valido = False
-    elif titulo[9] not in digitos_validos:
-        titulo_valido = False
-    elif titulo[10] not in digitos_validos:
-        titulo_valido = False
-    elif titulo[11] not in digitos_validos:
-        titulo_valido = False
-    # Verifica se o título tem exatamente 12 dígitos e verifica se todos os caracteres são todos números.
-        
-    if titulo_valido == False:
-        return False
-    else: 
-        numero_sequencial = titulo[0:8] 
-        numero_unidade_federativa = titulo[8:10]
-        primeiro_digito_verificador_informado = titulo[10]
-        segundo_digito_verificador_informado = titulo[11]
+def validacaoTitulo(titulo):    
+    numero_sequencial = titulo[0:8] 
+    numero_unidade_federativa = titulo[8:10]
+    primeiro_digito_verificador_informado = titulo[10]
+    segundo_digito_verificador_informado = titulo[11]
 
-        unidade_federativa = int(numero_unidade_federativa)
+    unidade_federativa = int(numero_unidade_federativa)
     # Separa as partes do título de eleitor. 
 
     if unidade_federativa < 1 or unidade_federativa > 28:
