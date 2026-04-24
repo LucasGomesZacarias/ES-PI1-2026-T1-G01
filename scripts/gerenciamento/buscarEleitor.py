@@ -28,3 +28,5 @@ def buscar_eleitor():
     else:
         os.system ("cls")
         print("Eleitor não encontrado")
+        time.sleep(2)
+        buscar_eleitor()
