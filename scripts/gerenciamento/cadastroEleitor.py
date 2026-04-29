@@ -6,16 +6,12 @@ from gerenciamento import validacaoDeCpf
 from gerenciamento import criptografia
 from gerenciamento import validacao_titulo
 from gerenciamento import menus
+import conexao_bd
 
 def cadastrar_eleitor():
     os.system ("cls")
     #Conexão BD
-    conexao = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='07112cep',
-        database='projeto_pi'
-    )
+    conexao=conexao_bd.conexao_bd()
     cursor = conexao.cursor()
     #input nome
     nome = input(f"==========================================\nCadastrar Eleitor\n\nNome: ")

@@ -1,14 +1,21 @@
 import mysql.connector
 # Conexão com o banco
-conexao = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='Augusto0609@',
-    database='banco_dados_pi'
-)
+def conexao_bd():
+    conexao = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='Augusto0609@',
+        database='banco_dados_pi'
+    )
+
+    return conexao
+
+
+conexao=conexao_bd()
+
 cursor = conexao.cursor()
 # ---------- POST: Inserir um novo candidato ----------
-def inserir_candidato(nome, partido, numero_candidato):
+'''def inserir_candidato(nome, partido, numero_candidato):
     sql = "INSERT INTO candidatos (nome, partido, numero_candidato) VALUES (%s, %s, %s)"
     valores = (nome, partido, numero_candidato)
     cursor.execute(sql, valores)
@@ -24,4 +31,4 @@ inserir_candidato("Felipe", "ABCD", 13)
 listar_candidatos()
 # Fechar conexão
 cursor.close()
-conexao.close()
+conexao.close()'''
