@@ -13,8 +13,8 @@ def cadastrar_eleitor():
     conexao = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='Augusto0609@',
-        database='banco_dados_pi'
+        password='07112cep',
+        database='projeto_pi'
     )
     cursor = conexao.cursor()
     #input nome
@@ -77,7 +77,7 @@ def cadastrar_eleitor():
     #input título 
     titulo_eleitor = input(f"Titulo de Eleitor: ")
 
-    criptografia_TE = criptografia.criptografia(None, titulo_eleitor)
+    criptografia_TE = criptografia.criptografia(titulo_eleitor)
     cursor.execute("SELECT * FROM eleitores WHERE titulo_de_eleitor = %s", (criptografia_TE,))
     if cursor.fetchone():
         os.system('cls')
@@ -186,7 +186,7 @@ def cadastrar_eleitor():
        return
 
     # criptografia precisa do cpf e do titulo juntos por isso as duas verificações de duplicado fica aqui
-    criptografia_cpf = criptografia.criptografia(cpf, None)
+    criptografia_cpf = criptografia.criptografia(cpf)
     cursor.execute("SELECT * FROM eleitores WHERE cpf = %s", (criptografia_cpf,))
     if cursor.fetchone():
         os.system('cls')
