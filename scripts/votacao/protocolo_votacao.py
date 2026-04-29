@@ -1,5 +1,5 @@
 import random
-from scripts.gerenciamento.criptografia import criptografia
+from scripts.gerenciamento.criptografia import criptografia, descriptografia
 import mysql.connector
 import datetime
 
@@ -31,3 +31,15 @@ def salvar_protocolo(protocolo_criptografado, numero_candidato, voto_nulo):
     valores = (protocolo_criptografado, numero_candidato, voto_nulo, datetime.date.today())
     cursor.execute(sql, valores)
     conexao.commit()
+
+def listar_protocolo():
+    sql = "SELECT protocolo_votacao FROM votacao"
+    cursor.execute(sql)
+    resultado = cursor.fetchall()
+    protocolos = []
+    for linha in resultado:
+        protocolo_descriptografado = descriptografia(linha[0], None)
+        protocolos.append(protocolo_descriptografado)
+    protocolos.sort()
+    for protocolo in protocolos:
+        print(protocolo)
