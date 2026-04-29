@@ -1,7 +1,6 @@
-from votacao import votacao_menu_principal
+from votacao import votacao_menu_principal, log_ocorrencias, protocolo_votacao
 import os
 import time
-
 
 def abrir_votacao():
     opcao=0

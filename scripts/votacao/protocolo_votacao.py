@@ -1,15 +1,13 @@
 import random
-from scripts.gerenciamento.criptografia import criptografia, descriptografia
+from gerenciamento.criptografia import criptografia, descriptografia
 import mysql.connector
 import datetime
+import conexao_bd
 
-conexao = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='Augusto0609@',
-    database='banco_dados_pi'
-)
+
+conexao=conexao_bd.conexao_bd()
 cursor = conexao.cursor()
+
 
 def gerar_protocolo(numero_candidato):
     letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -23,7 +21,8 @@ def gerar_protocolo(numero_candidato):
     for i in range (5):
         digitos += str(random.randint(0, 9))
     protocolo = "V" + letra1 + letra2 + "26" + numero_atualizado + digitos
-    protocolo_criptografado = criptografia(protocolo, None) 
+    protocolo_criptografado = criptografia(protocolo) 
+    print(protocolo_criptografado)
     return protocolo, protocolo_criptografado    
 
 def salvar_protocolo(protocolo_criptografado, numero_candidato, voto_nulo):
@@ -38,7 +37,7 @@ def listar_protocolo():
     resultado = cursor.fetchall()
     protocolos = []
     for linha in resultado:
-        protocolo_descriptografado = descriptografia(linha[0], None)
+        protocolo_descriptografado = descriptografia(linha[0], False)
         protocolos.append(protocolo_descriptografado)
     protocolos.sort()
     for protocolo in protocolos:
