@@ -91,7 +91,7 @@ def menu_gerenciamento():
         case 3:
             cadastroEleitor.cadastrar_eleitor()
         case 4:
-            deletarEleitor.deletar_eleitor()
+            deletarEleitor.deletar()
         case 5:
             buscarEleitor.buscar_eleitor()
         case 6:
