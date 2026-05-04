@@ -1,7 +1,7 @@
 import os
 import time
 import conexao_bd
-from zerezima import zerezima
+from votacao import zerezima
 from gerenciamento import criptografia
 from votacao import votacao_menu_principal
 

@@ -2,8 +2,7 @@ import os
 import time
 import conexao_bd
 from gerenciamento import criptografia
-from votacao import votacao_menu_principal
-from votacao_submenus import abrir_votacao
+from votacao import votacao_menu_principal, votacao_submenus
 def so_numeros(valor):
     for caractere in valor:
         if caractere not in "0123456789":
@@ -95,7 +94,7 @@ def encerrarVotacao(valida):
         print("Encerramento cancelado. Retornando ao menu anterior.")
         time.sleep(2)
         valida == 1
-        return abrir_votacao()
+        return votacao_submenus.abrir_votacao()
 
     
     if confirmacao in ("Sim", "sim", "S", "s"):

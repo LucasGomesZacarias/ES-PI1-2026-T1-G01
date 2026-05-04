@@ -1,6 +1,6 @@
 from votacao import votacao_menu_principal, log_ocorrencias, protocolo_votacao
-from autenticacao_mesario import validaMesario
-from encerramento import encerrarVotacao
+from votacao import autenticacao_mesario
+from votacao import encerramento
 import os
 import time
 from votacao import protocolo_votacao, registro_votos
@@ -8,7 +8,7 @@ from votacao import protocolo_votacao, registro_votos
 def abrir_votacao():
     valida = 0
     if valida == 0:
-       return validaMesario()
+       return autenticacao_mesario.validaMesario()
 
     opcao=0
     while opcao!=3:
@@ -17,9 +17,9 @@ def abrir_votacao():
             match opcao:
                 case 1:
                     os.system('cls')
-                    
+                    registro_votos.votar()
                 case 2:
-                    encerrarVotacao()
+                    encerramento.encerrarVotacao()
                     os.system('cls')
                     pass
                 case 3:

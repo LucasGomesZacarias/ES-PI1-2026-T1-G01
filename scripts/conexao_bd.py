@@ -3,9 +3,9 @@ import mysql.connector
 def conexao_bd():
     conexao = mysql.connector.connect(
        host='localhost',
-    user='root',
-    password='Augusto0609@',
-    database='banco_dados_pi'
+        user='root',
+        password='07112cep',
+        database='projeto_pi'
     )
 
     return conexao
