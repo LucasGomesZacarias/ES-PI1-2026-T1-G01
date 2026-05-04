@@ -11,7 +11,8 @@ def votacao_menu_principal():
             match opcao:
                 case 1:
                     os.system('cls')
-                    votacao_submenus.abrir_votacao()
+                    valida=0
+                    votacao_submenus.abrir_votacao(valida)
                 case 2:
                     os.system('cls')
                     votacao_submenus.auditoria_votacao()

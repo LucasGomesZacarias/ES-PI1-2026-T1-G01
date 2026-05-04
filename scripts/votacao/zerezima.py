@@ -16,9 +16,12 @@ def zerezima ():
     os.system('cls')
 
     conexao = conexao_bd.conexao_bd()
-    cursor = conexao.cursor()
+    cursor = conexao.cursor(dictionary=True)
 
     cursor.execute("DELETE FROM votacao")
+    conexao.commit()
+
+    cursor.execute("UPDATE eleitores SET confirmacao_de_voto = FALSE")
     conexao.commit()
 
     cursor.execute("SELECT numero_candidato, nome, partido FROM candidatos")
@@ -37,3 +40,5 @@ def zerezima ():
 
     cursor.close()
     conexao.close()
+
+    return 1

@@ -234,10 +234,10 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
 
     partes_nome = nome.split() #divide o nome para pegar partes dele para criar a chave
     chave_de_acesso = partes_nome[0][:2].upper() + partes_nome[1][0].upper() + str(random.randint(1000, 9999))
-    chave_de_acesso=criptografia(chave_de_acesso)
+    chave_de_acesso_criptografada=criptografia.criptografia(chave_de_acesso)
     #insert no BD
     sql = "INSERT INTO eleitores (nome, cpf, titulo_de_eleitor, mesario, chave_de_acesso) VALUES (%s, %s, %s, %s, %s)"
-    cursor.execute(sql, (nome, criptografia_cpf, criptografia_TE, mesario, chave_de_acesso))
+    cursor.execute(sql, (nome, criptografia_cpf, criptografia_TE, mesario, chave_de_acesso_criptografada))
     conexao.commit()
     cursor.close()
     conexao.close()

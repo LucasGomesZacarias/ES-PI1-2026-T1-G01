@@ -8,7 +8,7 @@ import time
 conexao = conexao_bd.conexao_bd()
 
 def identificar_eleitor(titulo, quatro_digitos_cpf, chave):
-    cursor = conexao.cursor()
+    cursor = conexao.cursor(dictionary=True)
     cursor.execute("SELECT * FROM eleitores WHERE titulo_de_eleitor = %s", (titulo,))
     eleitor = cursor.fetchone()
     cursor.close()
@@ -63,8 +63,11 @@ def marcar_como_votou(id_eleitor):
 def votar():
     print("\n--- Identificacao do Eleitor ---")
     titulo = input("Titulo de eleitor: ")
+    print(titulo)
     quatro_digitos = input("4 primeiros digitos do CPF: ")
+    print(quatro_digitos)
     chave = input("Chave de acesso: ")
+    print(chave)
 
     eleitor = identificar_eleitor(titulo, quatro_digitos, chave)
 # Coleta os dados do eleitor para validação.
@@ -127,6 +130,8 @@ def votar():
     print("  Protocolo: " + protocolo)
     print("  Guarde este numero como comprovante.")
     print("==================================================")
+
+    return 1
 
 
 

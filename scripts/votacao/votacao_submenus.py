@@ -5,10 +5,10 @@ import os
 import time
 from votacao import protocolo_votacao, registro_votos
 
-def abrir_votacao():
-    valida = 0
+def abrir_votacao(valida):
     if valida == 0:
-       return autenticacao_mesario.validaMesario()
+        valida=autenticacao_mesario.validaMesario()
+
 
     opcao=0
     while opcao!=3:
@@ -21,7 +21,6 @@ def abrir_votacao():
                 case 2:
                     encerramento.encerrarVotacao()
                     os.system('cls')
-                    pass
                 case 3:
                     votacao_menu_principal.votacao_menu_principal() #apagar depois a opção voltar, aqui ta só pra teste
                 case _:

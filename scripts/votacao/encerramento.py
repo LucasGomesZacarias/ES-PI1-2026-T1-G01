@@ -12,7 +12,7 @@ def so_numeros(valor):
 def tentativa():
     novatentativa = ""
     while novatentativa not in ("SIM"):
-        novatentativa = input("Deseja tentar novamente (Sim/Não)").upper
+        novatentativa = input("Deseja tentar novamente (Sim/Não)").upper()
         if novatentativa in ("SIM"):
             return encerrarVotacao()
         if novatentativa in ("NÃO" or "NAO"):
@@ -23,7 +23,7 @@ def tentativa():
             os.system('cls')
 
 
-def encerrarVotacao(valida):
+def encerrarVotacao():
     conexao = conexao_bd.conexao_bd()
     cursor = conexao.cursor(dictionary=True)
     os.system("cls")
@@ -86,20 +86,20 @@ def encerrarVotacao(valida):
 
     
     os.system('cls')
-    confirmacao = input("Deseja realmente encerrar a votação? (Sim/Não): ").upper
+    confirmacao = input("Deseja realmente encerrar a votação? (Sim/Não): ").upper()
 
     
-    if confirmacao in ("Não", "Nao", "não", "nao", "N", "n"):
+    if confirmacao in ("NÃO", "NAO"):
         os.system('cls')
         print("Encerramento cancelado. Retornando ao menu anterior.")
         time.sleep(2)
-        valida == 1
-        return votacao_submenus.abrir_votacao()
+        valida=1
+        votacao_submenus.abrir_votacao(valida)
 
     
-    if confirmacao in ("Sim", "sim", "S", "s"):
+    if confirmacao==("SIM"):
         os.system('cls')
-        segunda_chave = input("Digite novamente sua chave de acesso para confirmar: ").strip()
+        segunda_chave = input("Digite novamente sua chave de acesso para confirmar: ")
 
         
         segunda_chave_criptografada = criptografia.criptografia(segunda_chave)
@@ -110,8 +110,10 @@ def encerrarVotacao(valida):
             return tentativa()
 
         os.system('cls')
-        print(f"Votação encerrada com sucesso! Obrigado(a), {resultado['nome']}.\n")
-        return print(f"Nome: {resultado['nome']}\nTítulo de eleitor: {titulo}\nCPF: {cpf_descriptografado}\nMesário: {'Sim' if resultado['mesario'] else 'Não'}")
+        print(f"Votação encerrada com sucesso! Obrigado(a), {resultado['nome']}.\n") 
+        print(f"Nome: {resultado['nome']}\nTítulo de eleitor: {titulo}\nCPF: {cpf_descriptografado}\nMesário: {'Sim' if resultado['mesario'] else 'Não'}")
+        time.sleep(5)
+        votacao_menu_principal.votacao_menu_principal()
 
     else:
         print("Resposta inválida. Apenas Sim ou Não são aceitos.")
