@@ -19,3 +19,9 @@ def log_voto():
 
 def log_encerramento():
     registrar_logs("ENCERRAMENTO: Votação finalizada com sucesso")
+
+def exibir_logs():
+    with open ("log_ocorrencias.txt", "r", encoding="utf-8") as arquivo:
+            arquivo.readline()
+            for linha in arquivo:
+                  print(linha)
