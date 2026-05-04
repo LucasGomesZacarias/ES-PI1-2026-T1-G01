@@ -1,7 +1,6 @@
 import os
 import time
 import random
-import mysql.connector
 from gerenciamento import validacaoDeCpf
 from gerenciamento import criptografia
 from gerenciamento import validacao_titulo

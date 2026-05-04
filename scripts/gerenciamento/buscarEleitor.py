@@ -1,7 +1,6 @@
 import os
 import time
 import random 
-import mysql.connector
 import conexao_bd
 from gerenciamento import criptografia
 

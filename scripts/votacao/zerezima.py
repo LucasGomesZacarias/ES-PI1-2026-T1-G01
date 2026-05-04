@@ -16,13 +16,16 @@ def zerezima ():
     os.system('cls')
 
     conexao = conexao_bd.conexao_bd()
-    cursor = conexao.cursor(dictionary=True)
+    cursor = conexao.cursor()
 
     cursor.execute("DELETE FROM votacao")
     conexao.commit()
 
     cursor.execute("SELECT numero_candidato, nome, partido FROM candidatos")
     candidatos = cursor.fetchall()
+
+    with open('log_ocorrencias.txt', 'w'):
+        pass
 
     
     print("ZERÉZIMA CONCLUÍDA - TOTAL DE VOTOS POR CANDIDATO:")

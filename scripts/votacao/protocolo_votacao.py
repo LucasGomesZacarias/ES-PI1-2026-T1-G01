@@ -1,6 +1,5 @@
 import random
 from gerenciamento.criptografia import criptografia, descriptografia
-import mysql.connector
 import datetime
 import conexao_bd
 
