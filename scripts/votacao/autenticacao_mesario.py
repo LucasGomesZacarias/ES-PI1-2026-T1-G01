@@ -13,14 +13,14 @@ def so_numeros(valor):
 
 def tentativa ():
     novatentativa = ""
-    while novatentativa not in ("S" or "s"):
-        novatentativa = input("Deseja tentar novamente (S/N)")
-        if novatentativa in ("S" or "s"):
+    while novatentativa not in ("SIM"):
+        novatentativa = input("Deseja tentar novamente (Sim/Não)").upper
+        if novatentativa in ("SIM"):
             return validaMesario()
-        if novatentativa in ("N" or "n"):
+        if novatentativa in ("NAO" or "NÃO"):
             return votacao_menu_principal()
         else:
-            print("Apenas S ou N ")
+            print("Apenas Sim ou Nao ")
             time.sleep(4)
             os.system('cls')
 
@@ -92,6 +92,6 @@ def validaMesario ():
     zerezima()
     os.system("cls")
     print(f" Mesário validado com sucesso! Bem vindo(a), {resultado['nome']}.\n")
-    return print(f"Nome: {resultado['nome']}\nTítulo de eleitor: {titulo}\nCPF: {cpf_descriptografado}\nMesário: {'Sim' if resultado['mesario'] else 'Não'}")
+    return print(f"Nome: {resultado['nome']}\nTítulo de eleitor: {titulo}\nCPF: {cpf_descriptografado}\nMesário: {'Sim' if resultado['mesario'] else 'Não'}",)
  
 
