@@ -1,8 +1,13 @@
 from votacao import votacao_menu_principal, log_ocorrencias, protocolo_votacao
+from autenticacao_mesario import validaMesario
 import os
 import time
 
 def abrir_votacao():
+    valida = 0
+    if valida == 0:
+       return validaMesario()
+
     opcao=0
     while opcao!=3:
         try:
