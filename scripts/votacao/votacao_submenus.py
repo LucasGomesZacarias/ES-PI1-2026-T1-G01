@@ -1,5 +1,6 @@
 from votacao import votacao_menu_principal, log_ocorrencias, protocolo_votacao
 from autenticacao_mesario import validaMesario
+from encerramento import encerrarVotacao
 import os
 import time
 from votacao import protocolo_votacao, registro_votos
@@ -18,7 +19,7 @@ def abrir_votacao():
                     os.system('cls')
                     
                 case 2:
-                    #colocar depois a função pra voltar pro menu principal da votação quando encerrar a votação
+                    encerrarVotacao()
                     os.system('cls')
                     pass
                 case 3:
