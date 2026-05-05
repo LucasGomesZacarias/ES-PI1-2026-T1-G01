@@ -36,7 +36,7 @@ def validaMesario():
     chave_acesso = input("Chave de acesso: ")
 
     if not titulo or not cpf_prefixo or not chave_acesso:
-        log_ocorrencias.log_abertura()
+        log_ocorrencias.log_acesso_negado()
         print("Todos os campos são obrigatórios. Validação falhou.")
         time.sleep(2)
         os.system('clear')
@@ -45,7 +45,7 @@ def validaMesario():
 
     
     if len(cpf_prefixo) != 4 or not so_numeros(cpf_prefixo):
-        log_ocorrencias.log_abertura()
+        log_ocorrencias.log_acesso_negado()
         print("Digitos incoerentes maior ou diferente do esperado. Validação falhou.")
         time.sleep(2)
         tentativa()
@@ -56,7 +56,7 @@ def validaMesario():
     cursor.execute(busca, (titulo_criptografado,))
     resultado = cursor.fetchone()
     if not resultado:
-        log_ocorrencias.log_abertura()
+        log_ocorrencias.log_acesso_negado()
         print("Pessoa não encontrada. Validação falhou.")
         time.sleep(2)
         tentativa()
@@ -67,20 +67,20 @@ def validaMesario():
         print("CPF conferido com sucesso.")
     else:
         print("Dígitos do CPF não conferem. Validação falhou.")
+        log_ocorrencias.log_acesso_negado()
         time.sleep(2)
         tentativa()
 
     chave_armazenada = resultado["chave_de_acesso"]
-    chave_criptografada = criptografia.criptografia(chave_armazenada)
-
+    chave_criptografada = criptografia.criptografia(chave_acesso)
     if chave_criptografada != chave_armazenada:
-        log_ocorrencias.log_abertura()
+        log_ocorrencias.log_acesso_negado()
         print("Chave de acesso inválida. Validação falhou.")
         time.sleep(2)
         tentativa()
 
     if resultado["mesario"] == False:
-        log_ocorrencias.log_abertura()
+        log_ocorrencias.log_acesso_negado()
         print("Acesso negado: usuário não possui perfil de mesário. Validação falhou.")
         time.sleep(2)
         tentativa()

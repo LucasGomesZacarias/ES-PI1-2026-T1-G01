@@ -3,6 +3,7 @@ import time
 import conexao_bd
 from gerenciamento import criptografia
 from votacao import votacao_menu_principal, votacao_submenus
+from votacao import log_ocorrencias
 def so_numeros(valor):
     for caractere in valor:
         if caractere not in "0123456789":
@@ -113,6 +114,7 @@ def encerrarVotacao():
             tentativa_E()
 
         os.system('clear')
+        log_ocorrencias.log_encerramento()
         print(f"Votação encerrada com sucesso! Obrigado(a), {resultado['nome']}.\n") 
         print(f"Nome: {resultado['nome']}\nTítulo de eleitor: {titulo}\nCPF: {cpf_descriptografado}\nMesário: {'Sim' if resultado['mesario'] else 'Não'}")
         time.sleep(5)
