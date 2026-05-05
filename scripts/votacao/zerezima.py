@@ -4,16 +4,16 @@ import random
 import conexao_bd
 
 def zerezima ():
-    os.system('cls')
+    os.system('clear')
     print('==========================================\n\nExecutando ZERÉZIMA.')
     time.sleep(1)
-    os.system('cls')
+    os.system('clear')
     print('==========================================\n\nExecutando ZERÉZIMA..')
     time.sleep(1)
-    os.system('cls')
+    os.system('clear')
     print('==========================================\n\nExecutando ZERÉZIMA...')
     time.sleep(1)
-    os.system('cls')
+    os.system('clear')
 
     conexao = conexao_bd.conexao_bd()
     cursor = conexao.cursor(dictionary=True)

@@ -12,13 +12,13 @@ from gerenciamento import listarEleitor
 
 def menu_principal():
     op = 0 
-    os.system ("cls")
+    os.system ("clear")
     while op !=3:
         try:
             op = int(input(f"==========================================\nMenu\n\n1.0 Gerenciamento\n2.0 Votação\n3.0 Encerrar sistema\n\nEscolha sua opção:"))
             match op:
                 case 1:
-                    os.system ("cls")
+                    os.system ("clear")
                     ger = int(input(f"==========================================\nMenu Gerenciamento\n\n1.0 Gerenciamento de Eleitores\n2.0 Voltar ao Menu Principal\n\nEscolha sua opção:"))
                     match ger:
                         case 1:
@@ -26,62 +26,62 @@ def menu_principal():
                         case 2:
                             menu_principal()
                         case _:
-                            os.system('cls')
+                            os.system('clear')
                             print('==========================================\nOpção inválida\nvoltando.')
                             time.sleep(1)
-                            os.system('cls')
+                            os.system('clear')
                             print('==========================================\nOpção inválida\nvoltando..')
                             time.sleep(1)
-                            os.system('cls')
+                            os.system('clear')
                             print('==========================================\nOpção inválida\nvoltando...')
                             time.sleep(1)
-                            os.system('cls')
+                            os.system('clear')
                 
                 
                 case 2:
-                    os.system('cls')
+                    os.system('clear')
                     votacao_menu_principal.votacao_menu_principal()
 
                 case 3:
-                    os.system('cls')
+                    os.system('clear')
                     print('==========================================\n                 Saindo.\n==========================================')
                     time.sleep(1)
-                    os.system('cls')
+                    os.system('clear')
                     print('==========================================\n                 Saindo..\n==========================================')
                     time.sleep(1)
-                    os.system('cls')
+                    os.system('clear')
                     print('==========================================\n                 Saindo...\n==========================================')
                     time.sleep(1)
-                    os.system('cls')
+                    os.system('clear')
                     exit()
 
 
                 case _:
-                    os.system('cls')
+                    os.system('clear')
                     print('==========================================\nOpção inválida\nvoltando.')
                     time.sleep(1)
-                    os.system('cls')
+                    os.system('clear')
                     print('==========================================\nOpção inválida\nvoltando..')
                     time.sleep(1)
-                    os.system('cls')
+                    os.system('clear')
                     print('==========================================\nOpção inválida\nvoltando...')
                     time.sleep(1)
-                    os.system('cls')
+                    os.system('clear')
         except ValueError:
-            os.system('cls')
+            os.system('clear')
             print('==========================================\nUtilize números por favor\nvoltando.')
             time.sleep(1)
-            os.system('cls')
+            os.system('clear')
             print('==========================================\nUtilize números por favor\nvoltando..')
             time.sleep(1)
-            os.system('cls')
+            os.system('clear')
             print('==========================================\nUtilize números por favor\nvoltando...')
             time.sleep(1)
-            os.system('cls')
+            os.system('clear')
             menu_principal()
 
 def menu_gerenciamento():
-    os.system ("cls")
+    os.system ("clear")
     gerele = int(input(f"==========================================\nMenu Gerenciamento de Eleitores\n\n1.0 Editar Eleitor\n2.0 Listar Eleitores\n3.0 Cadastrar Eleitor\n4.0 Deletar Eleitor\n5.0 Buscar Eleitor\n6.0 Voltar ao Menu Principal\n\nEscolha sua opção:"))
     match gerele:
         case 1:
@@ -97,15 +97,15 @@ def menu_gerenciamento():
         case 6:
             menu_principal()
         case _:
-            os.system('cls')
+            os.system('clear')
             print('==========================================\nOpção inválida\nvoltando.')
             time.sleep(1)
-            os.system('cls')
+            os.system('clear')
             print('==========================================\nOpção inválida\nvoltando..')
             time.sleep(1)
-            os.system('cls')
+            os.system('clear')
             print('==========================================\nOpção inválida\nvoltando...')
             time.sleep(1)
-            os.system('cls')
+            os.system('clear')
 
 menu_principal()

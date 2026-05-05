@@ -10,39 +10,39 @@ def votacao_menu_principal():
             opcao=int(input('==========================================\nMenu Votação\n\n1. Abrir votação\n2. Auditoria de votação\n3. Resultados da Votação\n4. Voltar\n\nEscolha uma opção: '))
             match opcao:
                 case 1:
-                    os.system('cls')
+                    os.system('clear')
                     valida=0
                     votacao_submenus.abrir_votacao(valida)
                 case 2:
-                    os.system('cls')
+                    os.system('clear')
                     votacao_submenus.auditoria_votacao()
                     pass
                 case 3:
-                    os.system('cls')
+                    os.system('clear')
                     votacao_submenus.resultados_votacao()
                     pass
                 case 4:
-                    os.system('cls')
+                    os.system('clear')
                     menus.menu_principal()
                 case _:
-                    os.system('cls')
+                    os.system('clear')
                     print('==========================================\nOpção inválida\nvoltando.')
                     time.sleep(1)
-                    os.system('cls')
+                    os.system('clear')
                     print('==========================================\nOpção inválida\nvoltando..')
                     time.sleep(1)
-                    os.system('cls')
+                    os.system('clear')
                     print('==========================================\nOpção inválida\nvoltando...')
                     time.sleep(1)
-                    os.system('cls')
+                    os.system('clear')
         except ValueError:
-            os.system('cls')
+            os.system('clear')
             print('==========================================\nUtilize números por favor\nvoltando.')
             time.sleep(1)
-            os.system('cls')
+            os.system('clear')
             print('==========================================\nUtilize números por favor\nvoltando..')
             time.sleep(1)
-            os.system('cls')
+            os.system('clear')
             print('==========================================\nUtilize números por favor\nvoltando...')
             time.sleep(1)
-            os.system('cls')
+            os.system('clear')
