@@ -17,19 +17,19 @@ def tentativa():
         novatentativa = input("Deseja tentar novamente (Sim/Não)").upper()
         if novatentativa in ("SIM"):
             validaMesario()
-        if novatentativa in ("NAO", "NÃO"):
+        elif novatentativa in ("NAO", "NÃO"):
            votacao_menu_principal.votacao_menu_principal()
         else:
             print("Apenas Sim ou Nao ")
             time.sleep(4)
-            os.system('clear')
+            os.system('cls' if os.name == 'nt' else 'clear')
             tentativa()
 
 
 def validaMesario():
     conexao=conexao_bd.conexao_bd()
     cursor = conexao.cursor(dictionary=True)
-    os.system ("clear")
+    os.system('cls' if os.name == 'nt' else 'clear')
 
     titulo = input("Título de eleitor: ")
     cpf_prefixo = input("4 primeiros dígitos do CPF: ")
@@ -39,7 +39,7 @@ def validaMesario():
         log_ocorrencias.log_acesso_negado()
         print("Todos os campos são obrigatórios. Validação falhou.")
         time.sleep(2)
-        os.system('clear')
+        os.system('cls' if os.name == 'nt' else 'clear')
 
         tentativa()
 
@@ -88,7 +88,7 @@ def validaMesario():
 
     zerezima.zerezima()
     log_ocorrencias.log_abertura()
-    os.system("clear")
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(f" Mesário validado com sucesso! Bem vindo(a), {resultado['nome']}.\n")
     return print(f"Nome: {resultado['nome']}\nTítulo de eleitor: {titulo}\nCPF: {cpf_descriptografado}\nMesário: {'Sim' if resultado['mesario'] else 'Não'}",)
  

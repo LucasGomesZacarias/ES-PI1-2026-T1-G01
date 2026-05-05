@@ -10,7 +10,7 @@ def listar_eleitor():
     conexao=conexao_bd.conexao_bd()
     cursor = conexao.cursor()
 
-    os.system ("clear")
+    os.system('cls' if os.name == 'nt' else 'clear')
     print (f"==========================================\nListar Eleitor")
 
     cursor.execute("SELECT nome, cpf, titulo_de_eleitor, mesario, confirmacao_de_voto FROM eleitores")

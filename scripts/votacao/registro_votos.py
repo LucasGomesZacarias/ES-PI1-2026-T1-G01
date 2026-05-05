@@ -1,15 +1,16 @@
 import random
-from datetime import datetime
 import conexao_bd
-from gerenciamento import criptografia
+from gerenciamento.criptografia import criptografia, descriptografia
 from votacao import protocolo_votacao
 import time
+from votacao import log_ocorrencias
 
 conexao = conexao_bd.conexao_bd()
 
 def identificar_eleitor(titulo, quatro_digitos_cpf, chave):
     cursor = conexao.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM eleitores WHERE titulo_de_eleitor = %s", (titulo,))
+    titulo_criptografado = criptografia(titulo)
+    cursor.execute("SELECT * FROM eleitores WHERE titulo_de_eleitor = %s", (titulo_criptografado,))
     eleitor = cursor.fetchone()
     cursor.close()
 
@@ -17,7 +18,8 @@ def identificar_eleitor(titulo, quatro_digitos_cpf, chave):
         return None
 
     cpf_salvo = eleitor["cpf"]
-    if cpf_salvo[:4] != quatro_digitos_cpf:
+    cpf_descriptografado = descriptografia(cpf_salvo, True)
+    if cpf_descriptografado[:4] != quatro_digitos_cpf:
         return None
 
     if eleitor["chave_de_acesso"] != criptografia(chave):
@@ -27,7 +29,7 @@ def identificar_eleitor(titulo, quatro_digitos_cpf, chave):
 # Busca o eleitor no banco e valida seus dados (CPF e chave de acesso).
 
 def buscar_candidato(numero):
-    cursor = conexao.cursor()
+    cursor = conexao.cursor(dictionary=True)
     cursor.execute("SELECT * FROM candidatos WHERE numero_candidato = %s", (numero,))
     candidato = cursor.fetchone()
     cursor.close()
@@ -38,16 +40,9 @@ def buscar_candidato(numero):
 
 
 def registrar_voto(numero_candidato, voto_nulo):
-    protocolo_votacao.gerar_protocolo(numero_candidato)
-    hoje = datetime.now().strftime("%Y-%m-%d")
-
-    cursor = conexao.cursor()
-    cursor.execute(
-        "INSERT INTO votacao (numero_candidato, protocolo_votacao, dia, voto_nulo) VALUES (%s, %s, %s, %s)",
-        (numero_candidato, hoje, voto_nulo)
-    )
-    conexao.commit()
-    cursor.close()
+    protocolo, protocolo_criptografado = protocolo_votacao.gerar_protocolo(numero_candidato)
+    protocolo_votacao.salvar_protocolo(protocolo_criptografado, numero_candidato, voto_nulo)
+    return protocolo
 # Registra o voto no banco de dados com protocolo criptografado.
 
 def marcar_como_votou(id_eleitor):
@@ -78,7 +73,10 @@ def votar():
 # Verifica se os dados estão corretos.
 
     if eleitor["confirmacao_de_voto"] == True:
+        log_ocorrencias.log_duplo()
         print("Este eleitor ja votou.")
+    
+        return
 # Impede que o eleitor vote mais de uma vez.
                       
     confirmacao = "N"
@@ -130,7 +128,7 @@ def votar():
     print("  Protocolo: " + protocolo)
     print("  Guarde este numero como comprovante.")
     print("==================================================")
-
+    log_ocorrencias.log_voto()
     return 1
 
 

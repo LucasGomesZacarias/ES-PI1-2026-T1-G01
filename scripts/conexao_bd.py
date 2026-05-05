@@ -4,8 +4,8 @@ def conexao_bd():
     conexao = mysql.connector.connect(
        host='localhost',
         user='root',
-        password='mysql220277',
-        database='projeto_pi'
+        password='Augusto0609@',
+        database='banco_dados_pi'
     )
 
     return conexao
