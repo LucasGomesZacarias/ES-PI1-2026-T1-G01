@@ -1,6 +1,7 @@
 import os
 import time
 import conexao_bd
+import log_ocorrencias
 from votacao import zerezima
 from gerenciamento import criptografia
 from votacao import votacao_menu_principal
@@ -35,6 +36,7 @@ def validaMesario ():
     chave_acesso = input("Chave de acesso: ")
 
     if not titulo or not cpf_prefixo or not chave_acesso:
+        log_ocorrencias.log_abertura()
         print("Todos os campos são obrigatórios. Validação falhou.")
         os.system('cls')
         print('==========================================\n\nVoltando.')
@@ -51,6 +53,7 @@ def validaMesario ():
 
     
     if len(cpf_prefixo) != 4 or not so_numeros(cpf_prefixo):
+        log_ocorrencias.log_abertura()
         print("Digitos incoerentes maior ou diferente do esperado. Validação falhou.")
         time.sleep(2)
         return tentativa()
@@ -62,6 +65,7 @@ def validaMesario ():
     resultado = cursor.fetchone()
 
     if not resultado:
+        log_ocorrencias.log_abertura()
         print("Pessoa não encontrada. Validação falhou.")
         time.sleep(2)
         return tentativa()
@@ -79,17 +83,20 @@ def validaMesario ():
     chave_criptografada = criptografia.criptografia(chave_acesso)
 
     if chave_criptografada != chave_armazenada:
+        log_ocorrencias.log_abertura()
         print("Chave de acesso inválida. Validação falhou.")
         time.sleep(2)
         return tentativa()
 
     if resultado["mesario"] == False:
+        log_ocorrencias.log_abertura()
         print("Acesso negado: usuário não possui perfil de mesário. Validação falhou.")
         time.sleep(2)
         return tentativa()
 
 
     zerezima.zerezima()
+    log_ocorrencias.log_abertura()
     os.system("cls")
     print(f" Mesário validado com sucesso! Bem vindo(a), {resultado['nome']}.\n")
     return print(f"Nome: {resultado['nome']}\nTítulo de eleitor: {titulo}\nCPF: {cpf_descriptografado}\nMesário: {'Sim' if resultado['mesario'] else 'Não'}",)
