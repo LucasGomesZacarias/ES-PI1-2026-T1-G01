@@ -1,8 +1,7 @@
 import os
 import time
 import conexao_bd
-import log_ocorrencias
-from votacao import zerezima
+from votacao import zerezima, log_ocorrencias
 from gerenciamento import criptografia
 from votacao import votacao_menu_principal
 
@@ -12,21 +11,22 @@ def so_numeros(valor):
             return False
     return True
 
-def tentativa ():
+def tentativa():
     novatentativa = ""
-    while novatentativa not in ("SIM"):
+    while novatentativa not in ("SIM", "NAO", "NÃO"):
         novatentativa = input("Deseja tentar novamente (Sim/Não)").upper()
         if novatentativa in ("SIM"):
             return validaMesario()
         if novatentativa in ("NAO" or "NÃO"):
-            return votacao_menu_principal()
+           votacao_menu_principal.votacao_menu_principal()
         else:
             print("Apenas Sim ou Nao ")
             time.sleep(4)
             os.system('cls')
+            tentativa()
 
 
-def validaMesario ():
+def validaMesario():
     conexao=conexao_bd.conexao_bd()
     cursor = conexao.cursor(dictionary=True)
     os.system ("cls")
@@ -38,15 +38,7 @@ def validaMesario ():
     if not titulo or not cpf_prefixo or not chave_acesso:
         log_ocorrencias.log_abertura()
         print("Todos os campos são obrigatórios. Validação falhou.")
-        os.system('cls')
-        print('==========================================\n\nVoltando.')
-        time.sleep(1)
-        os.system('cls')
-        print('==========================================\n\nVoltando..')
-        time.sleep(1)
-        os.system('cls')
-        print('==========================================\n\nVoltando...')
-        time.sleep(1)
+        time.sleep(2)
         os.system('cls')
 
         return tentativa()

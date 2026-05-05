@@ -11,16 +11,18 @@ def so_numeros(valor):
 
 def tentativa():
     novatentativa = ""
-    while novatentativa not in ("SIM"):
+    while novatentativa not in ("SIM", "NAO", "NÃO"):
         novatentativa = input("Deseja tentar novamente (Sim/Não)").upper()
         if novatentativa in ("SIM"):
             return encerrarVotacao()
-        if novatentativa in ("NÃO" or "NAO"):
-            return votacao_menu_principal()
+        if novatentativa in ("NAO" or "NÃO"):
+           votacao_submenus.abrir_votacao()
         else:
-            print("Apenas S ou N ")
+            print("Apenas Sim ou Nao ")
             time.sleep(4)
             os.system('cls')
+            tentativa()
+
 
 
 def encerrarVotacao():
