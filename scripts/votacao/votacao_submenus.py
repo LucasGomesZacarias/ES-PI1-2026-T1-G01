@@ -13,7 +13,7 @@ def abrir_votacao(valida):
     opcao=0
     while opcao!=3:
         try:
-            opcao=int(input('==========================================\nMenu Abrir Votação\n\n1. Voto\n2. Encerrar votação\n3. Voltar\n\nEscolha uma opção: '))
+            opcao=int(input('==========================================\nMenu Abrir Votação\n\n1. Voto\n2. Encerrar votação\n\nEscolha uma opção: '))
             match opcao:
                 case 1:
                     os.system('cls' if os.name == 'nt' else 'clear')
@@ -21,8 +21,6 @@ def abrir_votacao(valida):
                 case 2:
                     encerramento.encerrarVotacao()
                     os.system('cls' if os.name == 'nt' else 'clear')
-                case 3:
-                    votacao_menu_principal.votacao_menu_principal() #apagar depois a opção voltar, aqui ta só pra teste
                 case _:
                     os.system('cls' if os.name == 'nt' else 'clear')
                     print('==========================================\nOpção inválida\nvoltando.')
