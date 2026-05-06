@@ -40,8 +40,8 @@ def validaMesario():
         print("Todos os campos são obrigatórios. Validação falhou.")
         time.sleep(2)
         os.system('cls' if os.name == 'nt' else 'clear')
-
         tentativa()
+        return
 
     
     if len(cpf_prefixo) != 4 or not so_numeros(cpf_prefixo):
@@ -49,6 +49,7 @@ def validaMesario():
         print("Digitos incoerentes maior ou diferente do esperado. Validação falhou.")
         time.sleep(2)
         tentativa()
+        return
     
     titulo_criptografado = criptografia.criptografia(titulo)
 
@@ -60,6 +61,7 @@ def validaMesario():
         print("Pessoa não encontrada. Validação falhou.")
         time.sleep(2)
         tentativa()
+        return
 
     cpf_descriptografado = criptografia.descriptografia(resultado["cpf"], True)
 
@@ -70,6 +72,7 @@ def validaMesario():
         log_ocorrencias.log_acesso_negado()
         time.sleep(2)
         tentativa()
+        return
 
     chave_armazenada = resultado["chave_de_acesso"]
     chave_criptografada = criptografia.criptografia(chave_acesso)
@@ -78,12 +81,14 @@ def validaMesario():
         print("Chave de acesso inválida. Validação falhou.")
         time.sleep(2)
         tentativa()
+        return
 
     if resultado["mesario"] == False:
         log_ocorrencias.log_acesso_negado()
         print("Acesso negado: usuário não possui perfil de mesário. Validação falhou.")
         time.sleep(2)
         tentativa()
+        return
 
 
     zerezima.zerezima()
