@@ -4,6 +4,7 @@ from votacao import encerramento
 import os
 import time
 from votacao import protocolo_votacao, registro_votos
+from votacao import boletim_urna
 
 def abrir_votacao(valida):
     if valida == 0:
@@ -92,7 +93,7 @@ def resultados_votacao():
             match opcao:
                 case 1:
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    pass
+                    boletim_urna.boletim_urna()
                 case 2:
                     os.system('cls' if os.name == 'nt' else 'clear')
                     pass
