@@ -7,6 +7,7 @@ from votacao import protocolo_votacao, registro_votos
 from votacao import boletim_urna
 from votacao import estatisticas_de_comparecimento
 from votacao import votos_por_partido
+from votacao import validacao_integridade
 
 def abrir_votacao(valida):
     if valida == 0:
@@ -104,7 +105,7 @@ def resultados_votacao():
                     votos_por_partido.votos_por_partido()
                 case 4:
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    pass
+                    validacao_integridade.validacao_integridade()
                 case 5:
                     os.system('cls' if os.name == 'nt' else 'clear')
                     votacao_menu_principal.votacao_menu_principal()
