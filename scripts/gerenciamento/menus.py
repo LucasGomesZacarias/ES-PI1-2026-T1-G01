@@ -7,6 +7,7 @@ from gerenciamento import cadastroEleitor
 from gerenciamento import deletarEleitor
 from gerenciamento import editarEleitor
 from gerenciamento import listarEleitor
+from gerenciamento import cadastroCandidato, listar_candidato, deletar_candidato, buscar_candidato, editar_candidato
 
 # separar submenus e munu principal em arquivos diferentes, para não ficar tão grande e confuso.
 
@@ -19,11 +20,13 @@ def menu_principal():
             match op:
                 case 1:
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    ger = int(input(f"==========================================\nMenu Gerenciamento\n\n1.0 Gerenciamento de Eleitores\n2.0 Voltar ao Menu Principal\n\nEscolha sua opção:"))
+                    ger = int(input(f"==========================================\nMenu Gerenciamento\n\n1.0 Gerenciamento de Eleitores\n2.0 Gerenciamento de Candidatos\n3.0 Voltar ao Menu Principal\n\nEscolha sua opção:"))
                     match ger:
                         case 1:
                             menu_gerenciamento()
                         case 2:
+                            gerenciamento_candidato()
+                        case 3:
                             menu_principal()
                         case _:
                             os.system('cls' if os.name == 'nt' else 'clear')
@@ -107,5 +110,36 @@ def menu_gerenciamento():
             print('==========================================\nOpção inválida\nvoltando...')
             time.sleep(1)
             os.system('cls' if os.name == 'nt' else 'clear')
+
+
+
+def gerenciamento_candidato():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    gerele = int(input(f"==========================================\nMenu Gerenciamento de Eleitores\n\n1.0 Editar Candidato\n2.0 Listar Candidato\n3.0 Cadastrar Candidato\n4.0 Deletar Candidato\n5.0 Buscar Candidato\n6.0 Voltar ao Menu Principal\n\nEscolha sua opção:"))
+    match gerele:
+        case 1:
+            editar_candidato.editar()
+        case 2:
+            listar_candidato.listar_candidato()
+        case 3:
+            cadastroCandidato.cadastrar_candidato()
+        case 4:
+            deletar_candidato.deletar()
+        case 5:
+            buscar_candidato.buscar_candidato()
+        case 6:
+            menu_principal()
+        case _:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('==========================================\nOpção inválida\nvoltando.')
+            time.sleep(1)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('==========================================\nOpção inválida\nvoltando..')
+            time.sleep(1)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('==========================================\nOpção inválida\nvoltando...')
+            time.sleep(1)
+            os.system('cls' if os.name == 'nt' else 'clear')
+
 
 menu_principal()
