@@ -5,6 +5,8 @@ import os
 import time
 from votacao import protocolo_votacao, registro_votos
 from votacao import boletim_urna
+from votacao import estatisticas_de_comparecimento
+from votacao import votos_por_partido
 
 def abrir_votacao(valida):
     if valida == 0:
@@ -96,10 +98,10 @@ def resultados_votacao():
                     boletim_urna.boletim_urna()
                 case 2:
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    pass
+                    estatisticas_de_comparecimento.estatisticas_comparecimento()
                 case 3:
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    pass
+                    votos_por_partido.votos_por_partido()
                 case 4:
                     os.system('cls' if os.name == 'nt' else 'clear')
                     pass
