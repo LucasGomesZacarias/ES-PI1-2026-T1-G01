@@ -244,6 +244,6 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
     #mensagem final 
     os.system('cls' if os.name == 'nt' else 'clear')
     print(f'==========================================\nEleitor cadastrado com sucesso!\n\nChave de acesso: {chave_de_acesso}\n\n==========================================')
-    time.sleep(3)
+    enter = input('Pressione Enter para continuar...')
     os.system('cls' if os.name == 'nt' else 'clear')
     menus.menu_gerenciamento()
