@@ -22,7 +22,6 @@ def log_encerramento():
 
 def exibir_logs():
     with open ("log_ocorrencias.txt", "r", encoding="utf-8") as arquivo:
-            arquivo.readline()
             print(f"==========Lista de logs==========\n")
             for linha in arquivo:
                 print(linha)

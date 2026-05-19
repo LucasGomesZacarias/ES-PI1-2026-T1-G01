@@ -9,11 +9,11 @@ def boletim_urna():
     os.system('cls' if os.name == 'nt' else 'clear')
     print (f"==========================================\nCandidatos")
 
-    cursor.execute("SELECT c.nome AS Candidato, c.partido AS Partido, c.numero_candidato AS Numero, COUNT(*) AS Votos FROM candidatos c LEFT JOIN  votacao v ON c.numero_candidato = v.numero_candidato GROUP BY c.numero_candidato ORDER BY c.nome")
+    cursor.execute("SELECT c.nome AS Candidato, c.partido AS Partido, c.numero_candidato AS Numero, COUNT(v.numero_candidato) AS Votos FROM candidatos c LEFT JOIN  votacao v ON c.numero_candidato = v.numero_candidato GROUP BY c.numero_candidato ORDER BY c.nome")
     for (nome, partido, numero_candidato, votos) in cursor.fetchall():
 
         print(f"\n\n---------------------------------\nNome: {nome} \nPartido: {partido} \nNúmero do candidato: {numero_candidato}\nVotos: {votos}")
-    cursor.execute("SELECT c.nome AS Candidato, c.partido AS Partido, c.numero_candidato AS Numero, COUNT(*) AS Votos FROM candidatos c LEFT JOIN  votacao v ON c.numero_candidato = v.numero_candidato GROUP BY c.numero_candidato ORDER BY Votos DESC LIMIT 1")
+    cursor.execute("SELECT c.nome AS Candidato, c.partido AS Partido, c.numero_candidato AS Numero, COUNT(v.numero_candidato) AS Votos FROM candidatos c LEFT JOIN  votacao v ON c.numero_candidato = v.numero_candidato GROUP BY c.numero_candidato ORDER BY Votos DESC LIMIT 1")
     vencedor = cursor.fetchone()
     if vencedor:
         nome, partido, numero_candidato, votos = vencedor

@@ -2,17 +2,14 @@ import os
 import time
 import random 
 import conexao_bd
+from tqdm import tqdm
+from colorama import Fore, Back, Style, init
+
 
 def zerezima ():
     os.system('cls' if os.name == 'nt' else 'clear')
-    print('==========================================\n\nExecutando ZERÉZIMA.')
-    time.sleep(1)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print('==========================================\n\nExecutando ZERÉZIMA..')
-    time.sleep(1)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print('==========================================\n\nExecutando ZERÉZIMA...')
-    time.sleep(1)
+    for i in tqdm(range(100), desc= 'EXECUTANDO ZERÉZIMA' , bar_format="{l_bar}%s{bar}%s{r_bar}" % (Style.BRIGHT + Fore.GREEN, Fore.RESET)):
+        time.sleep(0.04)
     os.system('cls' if os.name == 'nt' else 'clear')
 
     conexao = conexao_bd.conexao_bd()

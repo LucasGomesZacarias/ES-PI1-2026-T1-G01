@@ -8,6 +8,8 @@ from gerenciamento import deletarEleitor
 from gerenciamento import editarEleitor
 from gerenciamento import listarEleitor
 from gerenciamento import cadastroCandidato, listar_candidato, deletar_candidato, buscar_candidato, editar_candidato
+from tqdm import tqdm
+from colorama import Fore, Back, Style, init
 
 # separar submenus e munu principal em arquivos diferentes, para não ficar tão grande e confuso.
 
@@ -47,14 +49,9 @@ def menu_principal():
 
                 case 3:
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    print('==========================================\n                 Saindo.\n==========================================')
-                    time.sleep(1)
-                    os.system('cls' if os.name == 'nt' else 'clear')
-                    print('==========================================\n                 Saindo..\n==========================================')
-                    time.sleep(1)
-                    os.system('cls' if os.name == 'nt' else 'clear')
-                    print('==========================================\n                 Saindo...\n==========================================')
-                    time.sleep(1)
+                    print ('\n\n\n\n\n')
+                    for i in tqdm(range(100), desc= 'SAINDO' , bar_format="{l_bar}%s{bar}%s{r_bar}" % (Style.BRIGHT + Fore.BLACK, Fore.RESET)):
+                        time.sleep(0.02)
                     os.system('cls' if os.name == 'nt' else 'clear')
                     exit()
 
@@ -142,4 +139,4 @@ def gerenciamento_candidato():
             os.system('cls' if os.name == 'nt' else 'clear')
 
 
-menu_principal()
+
