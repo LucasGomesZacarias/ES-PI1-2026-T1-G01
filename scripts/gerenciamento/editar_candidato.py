@@ -3,6 +3,7 @@ import time
 import random
 from gerenciamento import menus
 import conexao_bd
+import rich
 
 def editar():
     
@@ -24,7 +25,7 @@ def editar():
                     nome = input(f"==========================================\nEditar Candidato\n\nNome: ")
                     if nome is None or nome == "":
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print (f"==========================================\nErro: O nome não pode ser vazio\n==========================================")
+                        rich.print(f"==========================================\n[red]Erro:[/red] O nome não pode ser vazio\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -41,7 +42,7 @@ def editar():
                     #tratamento de erro para nome incompleto
                     if len(nome.split()) < 2:
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print (f"==========================================\nErro: Informe o nome completo!\n==========================================")
+                        rich.print(f"==========================================\n[red]Erro:[/red] Informe o nome completo!\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -59,7 +60,7 @@ def editar():
                     for caractere in nome:
                         if caractere in "0123456789":
                             os.system('cls' if os.name == 'nt' else 'clear')
-                            print (f"==========================================\nErro: O nome não pode conter números\n==========================================")
+                            rich.print(f"==========================================\n[red]Erro:[/red] O nome não pode conter números\n==========================================")
                             time.sleep(2)
                             os.system('cls' if os.name == 'nt' else 'clear')
                             print('==========================================\n\nvoltando.')
@@ -89,7 +90,7 @@ def editar():
                     partido = input(f"==========================================\nEditar Candidato\n\nPartido: ")
                     if partido is None or partido == "":
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print (f"==========================================\nErro: O partido não pode ser vazio\n==========================================")
+                        rich.print(f"==========================================\n[red]Erro:[/red] O partido não pode ser vazio\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -106,7 +107,7 @@ def editar():
                     for caractere in partido:
                         if caractere in "0123456789":
                             os.system('cls' if os.name == 'nt' else 'clear')
-                            print (f"==========================================\nErro: O partido não pode conter números\n==========================================")
+                            rich.print(f"==========================================\n[red]Erro:[/red] O partido não pode conter números\n==========================================")
                             time.sleep(2)
                             os.system('cls' if os.name == 'nt' else 'clear')
                             print('==========================================\n\nvoltando.')
@@ -136,7 +137,7 @@ def editar():
                     numero_candidato = input(f"==========================================\nEditar Candidato\n\nNúmero do Candidato: ")
                     if numero_candidato is None or numero_candidato == "":
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print (f"==========================================\nErro: O número não pode ser vazio\n==========================================")
+                        rich.print(f"==========================================\n[red]Erro:[/red] O número não pode ser vazio\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -154,7 +155,7 @@ def editar():
                         int(numero_candidato)
                     except ValueError:
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print (f"==========================================\nErro: Número de candidato deve conter apenas números!\n==========================================")
+                        rich.print(f"==========================================\n[red]Erro:[/red] Número de candidato deve conter apenas números!\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -171,7 +172,7 @@ def editar():
                     cursor.execute("SELECT * FROM candidatos WHERE numero_candidato = %s AND id_candidatos != %s", (numero_candidato, resultado['id_candidatos']))
                     if cursor.fetchone():
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print("==========================================\nErro: Número de candidato já cadastrado!\n==========================================")
+                        rich.print("==========================================\n[red]Erro:[/red] Número de candidato já cadastrado!\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -201,7 +202,7 @@ def editar():
                     nome = input(f"==========================================\nEditar Candidato\n\nNome: ")
                     if nome is None or nome == "":
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print (f"==========================================\nErro: O nome não pode ser vazio\n==========================================")
+                        rich.print(f"==========================================\n[red]Erro:[/red] O nome não pode ser vazio\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -217,7 +218,7 @@ def editar():
                         return
                     if len(nome.split()) < 2:
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print (f"==========================================\nErro: Informe o nome completo!\n==========================================")
+                        rich.print(f"==========================================\n[red]Erro:[/red] Informe o nome completo!\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -234,7 +235,7 @@ def editar():
                     for caractere in nome:
                         if caractere in "0123456789":
                             os.system('cls' if os.name == 'nt' else 'clear')
-                            print (f"==========================================\nErro: O nome não pode conter números\n==========================================")
+                            rich.print(f"==========================================\n[red]Erro:[/red] O nome não pode conter números\n==========================================")
                             time.sleep(2)
                             os.system('cls' if os.name == 'nt' else 'clear')
                             print('==========================================\n\nvoltando.')
@@ -252,7 +253,7 @@ def editar():
                     partido = input(f"Partido: ")
                     if partido is None or partido == "":
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print (f"==========================================\nErro: O partido não pode ser vazio\n==========================================")
+                        rich.print(f"==========================================\n[red]Erro:[/red] O partido não pode ser vazio\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -269,7 +270,7 @@ def editar():
                     for caractere in partido:
                         if caractere in "0123456789":
                             os.system('cls' if os.name == 'nt' else 'clear')
-                            print (f"==========================================\nErro: O partido não pode conter números\n==========================================")
+                            rich.print(f"==========================================\n[red]Erro:[/red] O partido não pode conter números\n==========================================")
                             time.sleep(2)
                             os.system('cls' if os.name == 'nt' else 'clear')
                             print('==========================================\n\nvoltando.')
@@ -287,7 +288,7 @@ def editar():
                     numero_candidato = input(f"Número do Candidato: ")
                     if numero_candidato is None or numero_candidato == "":
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print (f"==========================================\nErro: O número não pode ser vazio\n==========================================")
+                        rich.print(f"==========================================\n[red]Erro:[/red] O número não pode ser vazio\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -305,7 +306,7 @@ def editar():
                         int(numero_candidato)
                     except ValueError:
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print (f"==========================================\nErro: Número de candidato deve conter apenas números!\n==========================================")
+                        rich.print(f"==========================================\n[red]Erro:[/red] Número de candidato deve conter apenas números!\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -322,7 +323,7 @@ def editar():
                     cursor.execute("SELECT * FROM candidatos WHERE numero_candidato = %s AND id_candidatos != %s", (numero_candidato, resultado['id_candidatos']))
                     if cursor.fetchone():
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        print("==========================================\nErro: Número de candidato já cadastrado!\n==========================================")
+                        rich.print("==========================================\n[red]Erro:[/red] Número de candidato já cadastrado!\n==========================================")
                         time.sleep(2)
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print('==========================================\n\nvoltando.')
@@ -353,6 +354,6 @@ def editar():
                     
     else:
         os.system('cls' if os.name == 'nt' else 'clear')
-        print("Candidato não encontrado")
+        rich.print("==========================================\n[red]Erro:[/red] Candidato não encontrado\n==========================================")
         time.sleep(2)
         editar()

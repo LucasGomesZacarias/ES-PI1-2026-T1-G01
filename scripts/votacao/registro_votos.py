@@ -58,11 +58,9 @@ def marcar_como_votou(id_eleitor):
 def votar():
     print("\n--- Identificacao do Eleitor ---")
     titulo = input("Titulo de eleitor: ")
-    print(titulo)
     quatro_digitos = input("4 primeiros digitos do CPF: ")
-    print(quatro_digitos)
     chave = input("Chave de acesso: ")
-    print(chave)
+
 
     eleitor = identificar_eleitor(titulo, quatro_digitos, chave)
 # Coleta os dados do eleitor para validação.
@@ -102,7 +100,7 @@ def votar():
                 voto_nulo = False
     # Verifica se o candidato existe no banco.
         else:
-            print("Candidato nao encontrado.")
+            print("Candidato não encontrado.")
             print("Se confirmar, o voto sera NULO.")
             voto_nulo = True
     # Caso o candidato não exista, o voto será considerado nulo.
