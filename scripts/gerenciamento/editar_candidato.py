@@ -84,7 +84,7 @@ def editar():
                     print(f'==========================================\nCandidato editado com sucesso!\n\n==========================================')
                     time.sleep(3)
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    menus.menu_gerenciamento()
+                    menus.gerenciamento_candidato()
 
             case 2:
                     partido = input(f"==========================================\nEditar Candidato\n\nPartido: ")
@@ -131,7 +131,7 @@ def editar():
                     print(f'==========================================\nCandidato editado com sucesso!\n\n==========================================')
                     time.sleep(3)
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    menus.menu_gerenciamento()
+                    menus.gerenciamento_candidato()
 
             case 3:
                     numero_candidato = input(f"==========================================\nEditar Candidato\n\nNúmero do Candidato: ")
@@ -196,7 +196,7 @@ def editar():
                     print(f'==========================================\nCandidato editado com sucesso!\n\n==========================================')
                     time.sleep(3)
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    menus.menu_gerenciamento()
+                    menus.gerenciamento_candidato()
                     
             case 4:
                     nome = input(f"==========================================\nEditar Candidato\n\nNome: ")
@@ -349,7 +349,7 @@ def editar():
                     print(f'==========================================\nCandidato editado com sucesso!\n\n==========================================')
                     time.sleep(3)
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    menus.menu_gerenciamento()
+                    menus.gerenciamento_candidato()
 
                     
     else:

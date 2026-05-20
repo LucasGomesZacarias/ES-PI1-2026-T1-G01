@@ -132,7 +132,6 @@ def cadastrar_candidato(nome=None, partido=None, numero_candidato=None):
                 os.system('cls' if os.name == 'nt' else 'clear')
                 cadastrar_candidato(nome=nome, partido=partido)
                 return
-
         try:
             int(numero_candidato)
         except ValueError:
@@ -151,7 +150,22 @@ def cadastrar_candidato(nome=None, partido=None, numero_candidato=None):
             os.system('cls' if os.name == 'nt' else 'clear')
             cadastrar_candidato(nome=nome, partido=partido)
             return
-
+        if int(numero_candidato)<10 or int(numero_candidato)>=100:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                rich.print (f"==========================================\n[red]Erro:[/red] O número deve conter 2 dígitos e ser maior que 10\n==========================================")
+                time.sleep(2)
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print('==========================================\n\nvoltando.')
+                time.sleep(1)
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print('==========================================\n\nvoltando..')
+                time.sleep(1)
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print('==========================================\n\nvoltando...')
+                time.sleep(1)
+                os.system('cls' if os.name == 'nt' else 'clear')
+                cadastrar_candidato(nome=nome, partido=partido)
+                return
         cursor.execute("SELECT * FROM candidatos WHERE numero_candidato = %s", (numero_candidato,))
         if cursor.fetchone():
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -188,4 +202,4 @@ def cadastrar_candidato(nome=None, partido=None, numero_candidato=None):
     print(f'==========================================\nCandidato cadastrado com sucesso!\n\n==========================================')
     time.sleep(3)
     os.system('cls' if os.name == 'nt' else 'clear')
-    menus.menu_gerenciamento()
+    menus.gerenciamento_candidato()
