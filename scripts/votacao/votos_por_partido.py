@@ -8,10 +8,10 @@ def votos_por_partido():
         SELECT
             c.partido,
             COUNT(v.id_votacao) AS total_votos
-        FROM votacao v
-        JOIN candidatos c
+        FROM candidatos c
+        LEFT JOIN votacao v
             ON v.numero_candidato = c.numero_candidato
-        WHERE v.voto_nulo = FALSE
+            AND v.voto_nulo = FALSE
         GROUP BY c.partido
         ORDER BY total_votos DESC
     """)
