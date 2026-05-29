@@ -23,15 +23,12 @@ def gerar_protocolo(numero_candidato):
     letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     letra1 = random.choice(letras)
     letra2 = random.choice(letras)
-    numero_candidato=int(numero_candidato)
     if numero_candidato is None:
         numero_atualizado = "00"
-        
-    
-    elif numero_candidato < 10:
+    elif int(numero_candidato) < 10:
         numero_atualizado = "0" + str(numero_candidato)
     else:
-        numero_atualizado = str(numero_candidato)
+        numero_atualizado = str(int(numero_candidato))
     digitos = ""
     for i in range (5):
         digitos += str(random.randint(0, 9))
