@@ -7,6 +7,8 @@ from gerenciamento import validacao_titulo
 from gerenciamento import menus
 import conexao_bd
 import rich
+def header(): 
+    rich.print ("==========================================\n        ELEIÇÕES[blue]PUC[/blue]   |   2026")
 
 def cadastrar_candidato(nome=None, partido=None, numero_candidato=None):
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -16,6 +18,7 @@ def cadastrar_candidato(nome=None, partido=None, numero_candidato=None):
 
     #input nome
     if nome is None:
+        header()
         nome = input(f"==========================================\nCadastrar Candidato\n\nNome: ")
         #COLOCAR TRATAMENTO PARA NOME INCOMPLETO, É NECESSARIO ESCREVER PELO MENOS O PRIMEIRO E SEGUNDO NOME
         #tratamento de erro para nome vázio
@@ -74,6 +77,7 @@ def cadastrar_candidato(nome=None, partido=None, numero_candidato=None):
 
 
     if partido is None:
+        header()
         partido = input(f"==========================================\nCadastrar Candidato\n\nPartido: ")
         if partido is None or partido == "":
                 os.system('cls' if os.name == 'nt' else 'clear')
@@ -115,6 +119,7 @@ def cadastrar_candidato(nome=None, partido=None, numero_candidato=None):
 
 
     if numero_candidato is None:
+        header()
         numero_candidato = input(f"==========================================\nCadastrar Candidato\n\nNúmero de candidato: ")
         if numero_candidato is None or numero_candidato == "":
                 os.system('cls' if os.name == 'nt' else 'clear')
