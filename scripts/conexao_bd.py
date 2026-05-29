@@ -1,11 +1,11 @@
 import mysql.connector
 # Conexão com o banco
 def conexao_bd():
-    conexao = mysql.connector.connect(
+    conexao =   mysql.connector.connect(
        host='localhost',
         user='root',
-        password='Lf020609*',
-        database='projeto_pi'
+        password='Augusto0609@',
+        database='banco_dados_pi'
     )
 
     return conexao

@@ -36,7 +36,7 @@ def deletar():
                     print(f'==========================================\ncandidato deletado com sucesso!\n\n==========================================')
                     time.sleep(3)
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    menus.menu_gerenciamento()
+                    menus.gerenciamento_candidato()
             else:
                 deletar()
         elif escolha == 'NÃO' or escolha == 'NAO':
