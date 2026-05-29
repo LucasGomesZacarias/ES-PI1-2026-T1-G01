@@ -1,6 +1,11 @@
 import mysql.connector
 # Conexão com o banco
 def conexao_bd():
+    """Estabelece e retorna uma conexão com o banco de dados MySQL.
+
+    Returns:
+        mysql.connector.connection.MySQLConnection: Objeto de conexão ativo com o banco de dados.
+    """
     conexao =   mysql.connector.connect(
        host='localhost',
         user='root',

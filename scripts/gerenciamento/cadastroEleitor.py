@@ -7,9 +7,31 @@ from gerenciamento import validacao_titulo
 from gerenciamento import menus
 import conexao_bd
 import rich
-def header(): 
+def header():
+    """Exibe o cabeçalho padrão do sistema de eleições no terminal.
+
+    Returns:
+        None
+    """
     rich.print ("==========================================\n        ELEIÇÕES[blue]PUC[/blue]   |   2026")
+
 def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
+    """Realiza o cadastro de um novo eleitor no banco de dados.
+
+    Solicita interativamente nome, título de eleitor, CPF e status de mesário
+    com validações. Gera automaticamente uma chave de acesso única para o eleitor.
+    Usa recursividade para reexibir o formulário mantendo os campos já validados
+    em caso de erro.
+
+    Args:
+        nome (str): Nome completo do eleitor. Se None, solicita ao usuário.
+        titulo_eleitor (str): Título de eleitor com 12 dígitos. Se None, solicita ao usuário.
+        cpf (str): CPF com 11 dígitos sem formatação. Se None, solicita ao usuário.
+        mesario (int): 1 se o eleitor é mesário, 0 caso contrário. Se None, solicita ao usuário.
+
+    Returns:
+        None
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     #Conexão BD
     conexao=conexao_bd.conexao_bd()

@@ -1,5 +1,16 @@
 
 def criptografia(texto):
+    """Criptografa um texto usando multiplicação de matrizes (cifra de Hill) com alfabeto de 36 símbolos.
+
+    Converte o texto em pares de índices na tabela alfanumérica, multiplica pela
+    matriz chave e aplica módulo 36 para obter o texto cifrado.
+
+    Args:
+        texto (str): Texto a ser criptografado (letras maiúsculas e dígitos).
+
+    Returns:
+        str: Texto criptografado com o mesmo comprimento (ou comprimento + 1 se ímpar).
+    """
     tabela=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9']#36
     
     
@@ -58,6 +69,18 @@ def criptografia(texto):
 
 
 def descriptografia(texto, impar):
+    """Descriptografa um texto previamente criptografado pela cifra de Hill.
+
+    Aplica a matriz inversa da chave de criptografia para recuperar o texto original.
+    Se o texto original tinha comprimento ímpar, remove o último caractere adicionado.
+
+    Args:
+        texto (str): Texto criptografado a ser descriptografado.
+        impar (bool): True se o texto original tinha comprimento ímpar (remove último char).
+
+    Returns:
+        str: Texto descriptografado no formato original.
+    """
     tabela=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9']#36
     
     

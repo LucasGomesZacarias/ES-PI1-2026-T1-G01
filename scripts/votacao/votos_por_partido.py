@@ -1,6 +1,14 @@
 import conexao_bd
 
 def votos_por_partido():
+    """Exibe a contagem de votos válidos agrupada por partido político.
+
+    Realiza consulta no banco de dados excluindo votos nulos e agrupa os resultados
+    por partido em ordem decrescente de votos.
+
+    Returns:
+        list: Lista de dicionários com as chaves 'partido' e 'total_votos'.
+    """
     conexao = conexao_bd.conexao_bd()
     cursor = conexao.cursor(dictionary=True)
 

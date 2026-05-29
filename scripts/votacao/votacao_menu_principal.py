@@ -4,10 +4,23 @@ from votacao import votacao_submenus
 from gerenciamento import menus
 import rich
 
-def header(): 
+def header():
+    """Exibe o cabeçalho padrão do sistema de eleições no terminal.
+
+    Returns:
+        None
+    """
     rich.print ("==========================================\n        ELEIÇÕES[blue]PUC[/blue]   |   2026")
 
 def votacao_menu_principal():
+    """Exibe e gerencia o menu principal do módulo de votação.
+
+    Apresenta opções para abrir votação, acessar auditoria, ver resultados
+    e voltar ao menu principal. Permanece em loop até que o usuário volte.
+
+    Returns:
+        None
+    """
     opcao=0
     while opcao!=4:
         try:

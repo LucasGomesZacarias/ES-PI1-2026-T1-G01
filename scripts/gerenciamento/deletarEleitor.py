@@ -9,6 +9,14 @@ import conexao_bd
 import rich
 
 def deletar():
+    """Busca um eleitor pelo CPF ou título e realiza sua exclusão do banco de dados.
+
+    Solicita confirmação dupla antes de executar a operação de exclusão.
+    Chama a si mesma recursivamente em caso de entradas inválidas ou eleitor não encontrado.
+
+    Returns:
+        None
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     #Conexão BD
     conexao=conexao_bd.conexao_bd()

@@ -4,6 +4,15 @@ import random
 import conexao_bd
 
 def buscar_candidato():
+    """Busca e exibe os dados de um candidato pelo número de candidato.
+
+    Solicita ao usuário o número do candidato, realiza a busca no banco de dados
+    e exibe nome, partido e número. Chama a si mesma recursivamente caso o
+    candidato não seja encontrado.
+
+    Returns:
+        None
+    """
     conexao=conexao_bd.conexao_bd()
     os.system('cls' if os.name == 'nt' else 'clear')
     cursor = conexao.cursor(dictionary=True)

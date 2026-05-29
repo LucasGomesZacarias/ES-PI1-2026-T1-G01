@@ -2,6 +2,14 @@ import os
 import conexao_bd
 
 def validacao_integridade():
+    """Verifica a integridade dos dados comparando votos na urna com eleitores marcados como votados.
+
+    Compara o total de registros na tabela de votação com o total de eleitores
+    cuja confirmação de voto está marcada como TRUE, exibindo se há inconsistências.
+
+    Returns:
+        None
+    """
     conexao = conexao_bd.conexao_bd()
     cursor = conexao.cursor()
 
