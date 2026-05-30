@@ -1,4 +1,12 @@
-def validacaoTitulo(titulo):    
+def validacaoTitulo(titulo):
+    """Valida um título de eleitor verificando os dígitos verificadores e a unidade federativa.
+
+    Args:
+        titulo (str): String contendo os 12 dígitos do título de eleitor sem formatação.
+
+    Returns:
+        bool: True se o título for válido, False caso contrário.
+    """
     numero_sequencial = titulo[0:8] 
     numero_unidade_federativa = titulo[8:10]
     primeiro_digito_verificador_informado = titulo[10]

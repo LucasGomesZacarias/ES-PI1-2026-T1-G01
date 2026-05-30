@@ -9,10 +9,10 @@ import conexao_bd
 import rich
 
 def deletar():
-    """Busca um eleitor pelo CPF ou título e realiza sua exclusão do banco de dados.
+    """Busca um candidato pelo número e realiza sua exclusão do banco de dados.
 
     Solicita confirmação dupla antes de executar a operação de exclusão.
-    Chama a si mesma recursivamente em caso de entradas inválidas ou eleitor não encontrado.
+    Chama a si mesma recursivamente em caso de entradas inválidas ou candidato não encontrado.
 
     Returns:
         None
@@ -21,39 +21,35 @@ def deletar():
     #Conexão BD
     conexao=conexao_bd.conexao_bd()
     cursor = conexao.cursor(dictionary=True)
-    valor = input("Digite o CPF ou ti­tulo de eleitor: ")
+    valor = input("Digite o número do candidato: ")
     
-    valor=criptografia.criptografia(valor)
-
-    busca = "SELECT * FROM eleitores WHERE cpf = %s OR titulo_de_eleitor = %s"
-    cursor.execute(busca, (valor, valor))
+    busca = "SELECT * FROM candidatos WHERE numero_candidato = %s"
+    cursor.execute(busca, (valor,))
     resultado = cursor.fetchone()
     if resultado:
         os.system('cls' if os.name == 'nt' else 'clear')
 
-        cpf_descriptografado=criptografia.descriptografia(resultado['cpf'], True)
-        te_descriptografado=criptografia.descriptografia(resultado['titulo_de_eleitor'], False)
-        print(f"=========Eleitor==========\nNome: {resultado['nome']}\nCPF: {cpf_descriptografado}\nTitulo de eleitor: {te_descriptografado}\nMesario: {'Sim' if resultado['mesario'] else 'Não'}")
-        escolha = input (f'\n\nDeseja deletar esse eleitor?\nSim ou Não : ').upper() #upper pra deixar respostas tudo em maiusculo para o tratamento de erro a seguir
+        print(f"=========candidato==========\nNome: {resultado['nome']}\nPartido: {resultado['partido']}\nNúmedo de candidato: {resultado['numero_candidato']}")
+        escolha = input (f'\n\nDeseja deletar esse candidato?\nSim ou Não : ').upper() #upper pra deixar respostas tudo em maiusculo para o tratamento de erro a seguir
         if escolha == 'SIM':
-            escolha2 = input (f'\n\nDeseja mesmo deletar esse eleitor? Essa ação não poderá ser desfeita\n\nSim ou Não: ').upper() #upper pra deixar respostas tudo em maiusculo para o tratamento de erro a seguir
+            escolha2 = input (f'\n\nDeseja mesmo deletar esse candidato? Essa ação não poderá ser desfeita\n\nSim ou Não: ').upper() #upper pra deixar respostas tudo em maiusculo para o tratamento de erro a seguir
             if escolha2 == 'SIM':
-                    sql = "DELETE FROM eleitores WHERE id_eleitores = %s"
-                    cursor.execute(sql, (resultado['id_eleitores'],))
+                    sql = "DELETE FROM candidatos WHERE id_candidatos = %s"
+                    cursor.execute(sql, (resultado['id_candidatos'],))
                     conexao.commit()
                     cursor.close()
                     conexao.close()
                     #mensagem final 
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    print(f'==========================================\nEleitor deletado com sucesso!\n\n==========================================')
+                    print(f'==========================================\ncandidato deletado com sucesso!\n\n==========================================')
                     time.sleep(3)
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    menus.menu_gerenciamento()
+                    menus.gerenciamento_candidato()
             else:
                 deletar()
         elif escolha == 'NÃO' or escolha == 'NAO':
             os.system('cls' if os.name == 'nt' else 'clear')
-            print (f"==========================================\nNenhum Eleitor Deletado!\n==========================================")
+            print (f"==========================================\nNenhum candidato Deletado!\n==========================================")
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
             print('==========================================\n\nvoltando.')
@@ -85,6 +81,6 @@ def deletar():
             return  
     else:
         os.system('cls' if os.name == 'nt' else 'clear')
-        rich.print("==========================================\n[red]Erro:[/red] Eleitor não encontrado\n==========================================")
+        rich.print("==========================================\n[red]Erro:[/red] Candidato não encontrado\n==========================================")
         time.sleep(2)
         deletar()

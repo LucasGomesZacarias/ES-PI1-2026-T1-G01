@@ -5,6 +5,15 @@ import conexao_bd
 from gerenciamento import criptografia
 
 def buscar_eleitor():
+    """Busca e exibe os dados de um eleitor pelo CPF ou título de eleitor.
+
+    Solicita ao usuário o CPF ou título, realiza a busca no banco de dados
+    e exibe os dados descriptografados. Chama a si mesma recursivamente
+    caso o eleitor não seja encontrado.
+
+    Returns:
+        None
+    """
     conexao=conexao_bd.conexao_bd()
     os.system('cls' if os.name == 'nt' else 'clear')
     cursor = conexao.cursor(dictionary=True)

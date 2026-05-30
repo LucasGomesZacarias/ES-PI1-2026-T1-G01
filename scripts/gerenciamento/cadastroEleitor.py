@@ -6,8 +6,32 @@ from gerenciamento import criptografia
 from gerenciamento import validacao_titulo
 from gerenciamento import menus
 import conexao_bd
+import rich
+def header():
+    """Exibe o cabeçalho padrão do sistema de eleições no terminal.
+
+    Returns:
+        None
+    """
+    rich.print ("==========================================\n        ELEIÇÕES[blue]PUC[/blue]   |   2026")
 
 def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
+    """Realiza o cadastro de um novo eleitor no banco de dados.
+
+    Solicita interativamente nome, título de eleitor, CPF e status de mesário
+    com validações. Gera automaticamente uma chave de acesso única para o eleitor.
+    Usa recursividade para reexibir o formulário mantendo os campos já validados
+    em caso de erro.
+
+    Args:
+        nome (str): Nome completo do eleitor. Se None, solicita ao usuário.
+        titulo_eleitor (str): Título de eleitor com 12 dígitos. Se None, solicita ao usuário.
+        cpf (str): CPF com 11 dígitos sem formatação. Se None, solicita ao usuário.
+        mesario (int): 1 se o eleitor é mesário, 0 caso contrário. Se None, solicita ao usuário.
+
+    Returns:
+        None
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     #Conexão BD
     conexao=conexao_bd.conexao_bd()
@@ -15,12 +39,13 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
 
     #input nome
     if nome is None:
+        header()
         nome = input(f"==========================================\nCadastrar Eleitor\n\nNome: ")
         #COLOCAR TRATAMENTO PARA NOME INCOMPLETO, É NECESSARIO ESCREVER PELO MENOS O PRIMEIRO E SEGUNDO NOME
         #tratamento de erro para nome vázio
         if nome is None or nome == "":
             os.system('cls' if os.name == 'nt' else 'clear')
-            print (f"==========================================\nErro: O nome não pode ser vazio\n==========================================")
+            rich.print (f"==========================================\n[red]Erro:[/red] O nome não pode ser vazio\n==========================================")
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
             print('==========================================\n\nvoltando.')
@@ -37,7 +62,7 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
         #tratamento de erro para nome incompleto
         if len(nome.split()) < 2:
             os.system('cls' if os.name == 'nt' else 'clear')
-            print (f"==========================================\nErro: Informe o nome completo!\n==========================================")
+            rich.print (f"==========================================\n[red]Erro:[/red] Informe o nome completo!\n==========================================")
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
             print('==========================================\n\nvoltando.')
@@ -55,7 +80,7 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
         for caractere in nome:
             if caractere in "0123456789":
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print (f"==========================================\nErro: O nome não pode conter números\n==========================================")
+                rich.print (f"==========================================\n[red]Erro:[/red] O nome não pode conter números\n==========================================")
                 time.sleep(2)
                 os.system('cls' if os.name == 'nt' else 'clear')
                 print('==========================================\n\nvoltando.')
@@ -72,12 +97,13 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
 
     #input título
     if titulo_eleitor is None:
-        titulo_eleitor = input(f"Titulo de Eleitor: ")
+        header()
+        titulo_eleitor = input(f"==========================================\nCadastrar Eleitor\n\nTitulo de Eleitor: ")
 
         #tratamento de erro titulo maior ou menor q 12 letras
         if len(titulo_eleitor) != 12:
             os.system('cls' if os.name == 'nt' else 'clear')
-            print (f"==========================================\nErro: Título deve conter exatos 12 números!\n==========================================")
+            rich.print (f"==========================================\n[red]Erro:[/red] Título deve conter exatos 12 números!\n==========================================")
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
             print('==========================================\n\nvoltando.')
@@ -96,7 +122,7 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
             int(titulo_eleitor)
         except ValueError:
             os.system('cls' if os.name == 'nt' else 'clear')
-            print (f"==========================================\nErro: Título deve conter apenas números!\n==========================================")
+            rich.print (f"==========================================\n[red]Erro:[/red] Título deve conter apenas números!\n==========================================")
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
             print('==========================================\n\nvoltando.')
@@ -113,7 +139,7 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
         #validacao de titulo
         if not validacao_titulo.validacaoTitulo(titulo_eleitor):
             os.system('cls' if os.name == 'nt' else 'clear')
-            print (f"==========================================\nErro: TÍTULO INVALIDO !\n==========================================")
+            rich.print (f"==========================================\n[red]Erro:[/red] TÍTULO INVALIDO !\n==========================================")
             time.sleep(2)
             cadastrar_eleitor(nome=nome)
             return
@@ -122,7 +148,7 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
         cursor.execute("SELECT * FROM eleitores WHERE titulo_de_eleitor = %s", (criptografia_TE,))
         if cursor.fetchone():
             os.system('cls' if os.name == 'nt' else 'clear')
-            print("==========================================\nErro: Título de Eleitor já cadastrado!\n==========================================")
+            rich.print("==========================================\n[red]Erro:[/red] Título de Eleitor já cadastrado!\n==========================================")
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
             print('==========================================\n\nvoltando.')
@@ -141,11 +167,12 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
 
     #input cpf
     if cpf is None:
-        cpf = (input(f"CPF do Eleitor: "))
+        header()
+        cpf = (input(f"==========================================\nCadastrar Eleitor\n\nCPF do Eleitor: "))
         #tratamento de erro cpf maior ou menor q 11 digitos
         if len(cpf) != 11:
             os.system('cls' if os.name == 'nt' else 'clear')
-            print (f"==========================================\nErro: CPF deve conter exatos 11 números!\n==========================================")
+            rich.print (f"==========================================\n[red]Erro:[/red] CPF deve conter exatos 11 números!\n==========================================")
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
             print('==========================================\n\nvoltando.')
@@ -164,7 +191,7 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
             int(cpf)
         except ValueError:
             os.system('cls' if os.name == 'nt' else 'clear')
-            print (f"==========================================\nErro: CPF deve conter apenas números!\n==========================================")
+            rich.print (f"==========================================\n[red]Erro:[/red] CPF deve conter apenas números!\n==========================================")
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
             print('==========================================\n\nvoltando.')
@@ -181,7 +208,7 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
         #validação cpf
         if not validacaoDeCpf.validaCpf(cpf):
            os.system('cls' if os.name == 'nt' else 'clear')
-           print (f"==========================================\nErro: CPF INVALIDO !\n==========================================")
+           rich.print (f"==========================================\n[red]Erro:[/red] CPF INVALIDO !\n==========================================")
            time.sleep(2)
            cadastrar_eleitor(nome=nome, titulo_eleitor=titulo_eleitor)
            return
@@ -191,7 +218,7 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
         cursor.execute("SELECT * FROM eleitores WHERE cpf = %s", (criptografia_cpf,))
         if cursor.fetchone():
             os.system('cls' if os.name == 'nt' else 'clear')
-            print("==========================================\nErro: CPF já cadastrado!\n==========================================")
+            rich.print("==========================================\n[red]Erro:[/red] CPF já cadastrado!\n==========================================")
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
             print('==========================================\n\nvoltando.')
@@ -210,14 +237,15 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
 
     #input mesario
     if mesario is None:
-        mesario = input (f'Mesário? (Sim ou Não): ').upper() #upper pra deixar respostas tudo em maiusculo para o tratamento de erro a seguir
+        header()
+        mesario = input (f'==========================================\nCadastrar Eleitor\n\nMesário? (Sim ou Não): ').upper() #upper pra deixar respostas tudo em maiusculo para o tratamento de erro a seguir
         if mesario == 'SIM':
             mesario =1 #1 é verdadeiro no BD
         elif mesario == 'NÃO' or mesario == 'NAO':
             mesario = 0 #2 é falso no BD
         else:  #tratamento de erro para qualquer outra coisa sem ser sim ou nao
             os.system('cls' if os.name == 'nt' else 'clear')
-            print (f"==========================================\nErro: A resposta deve ser apenas sim ou não!\n==========================================")
+            rich.print (f"==========================================\n[red]Erro:[/red] A resposta deve ser apenas sim ou não!\n==========================================")
             time.sleep(2)
             os.system('cls' if os.name == 'nt' else 'clear')
             print('==========================================\n\nvoltando.')
@@ -243,7 +271,7 @@ def cadastrar_eleitor(nome=None, titulo_eleitor=None, cpf=None, mesario=None):
     conexao.close()
     #mensagem final 
     os.system('cls' if os.name == 'nt' else 'clear')
-    print(f'==========================================\nEleitor cadastrado com sucesso!\n\nChave de acesso: {chave_de_acesso}\n\n==========================================')
-    time.sleep(3)
+    rich.print(f'==========================================\n[green]Eleitor cadastrado com sucesso![/green]\n\nChave de acesso: [blue]{chave_de_acesso}[/blue]\n\n==========================================')
+    enter = input('Pressione Enter para continuar...')
     os.system('cls' if os.name == 'nt' else 'clear')
     menus.menu_gerenciamento()

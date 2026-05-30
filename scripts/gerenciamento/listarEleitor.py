@@ -6,7 +6,14 @@ from gerenciamento import criptografia
 
 
 def listar_eleitor():
+    """Lista todos os eleitores cadastrados no banco de dados.
 
+    Recupera e exibe nome, CPF (descriptografado), título de eleitor
+    (descriptografado), status de mesário e confirmação de voto de cada eleitor.
+
+    Returns:
+        None
+    """
     conexao=conexao_bd.conexao_bd()
     cursor = conexao.cursor()
 
