@@ -7,8 +7,30 @@ from gerenciamento import validacao_titulo
 from gerenciamento import menus
 import conexao_bd
 import rich
+def header():
+    """Exibe o cabeçalho padrão do sistema de eleições no terminal.
+
+    Returns:
+        None
+    """
+    rich.print ("==========================================\n        ELEIÇÕES[blue]PUC[/blue]   |   2026")
 
 def cadastrar_candidato(nome=None, partido=None, numero_candidato=None):
+    """Realiza o cadastro de um novo candidato no banco de dados.
+
+    Solicita interativamente nome, partido e número do candidato com validações.
+    Usa recursividade para reexibir o formulário mantendo os campos já validados
+    em caso de erro.
+
+    Args:
+        nome (str): Nome completo do candidato. Se None, solicita ao usuário.
+        partido (str): Nome do partido do candidato. Se None, solicita ao usuário.
+        numero_candidato (str): Número do candidato (2 dígitos, entre 10 e 99).
+                                Se None, solicita ao usuário.
+
+    Returns:
+        None
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     #Conexão BD
     conexao=conexao_bd.conexao_bd()
@@ -16,6 +38,7 @@ def cadastrar_candidato(nome=None, partido=None, numero_candidato=None):
 
     #input nome
     if nome is None:
+        header()
         nome = input(f"==========================================\nCadastrar Candidato\n\nNome: ")
         #COLOCAR TRATAMENTO PARA NOME INCOMPLETO, É NECESSARIO ESCREVER PELO MENOS O PRIMEIRO E SEGUNDO NOME
         #tratamento de erro para nome vázio
@@ -74,6 +97,7 @@ def cadastrar_candidato(nome=None, partido=None, numero_candidato=None):
 
 
     if partido is None:
+        header()
         partido = input(f"==========================================\nCadastrar Candidato\n\nPartido: ")
         if partido is None or partido == "":
                 os.system('cls' if os.name == 'nt' else 'clear')
@@ -115,6 +139,7 @@ def cadastrar_candidato(nome=None, partido=None, numero_candidato=None):
 
 
     if numero_candidato is None:
+        header()
         numero_candidato = input(f"==========================================\nCadastrar Candidato\n\nNúmero de candidato: ")
         if numero_candidato is None or numero_candidato == "":
                 os.system('cls' if os.name == 'nt' else 'clear')

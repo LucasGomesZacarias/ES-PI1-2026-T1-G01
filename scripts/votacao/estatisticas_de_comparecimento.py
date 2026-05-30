@@ -1,6 +1,15 @@
 import conexao_bd
 
 def estatisticas_comparecimento():
+    """Calcula e exibe estatísticas de comparecimento eleitoral.
+
+    Consulta o banco de dados para obter o total de eleitores cadastrados,
+    o total que já votou e o percentual de comparecimento.
+
+    Returns:
+        dict: Dicionário com as chaves 'total_eleitores', 'total_votantes'
+              e 'percentual_comparecimento'.
+    """
     conexao = conexao_bd.conexao_bd()
     cursor = conexao.cursor(dictionary=True)
 

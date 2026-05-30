@@ -8,6 +8,17 @@ from votacao import log_ocorrencias
 conexao = conexao_bd.conexao_bd()
 
 def identificar_eleitor(titulo, quatro_digitos_cpf, chave):
+    """Busca e valida um eleitor no banco de dados com base nas credenciais fornecidas.
+
+    Args:
+        titulo (str): Título de eleitor com 12 dígitos.
+        quatro_digitos_cpf (str): Primeiros 4 dígitos do CPF do eleitor.
+        chave (str): Chave de acesso do eleitor.
+
+    Returns:
+        dict | None: Dicionário com os dados do eleitor se as credenciais forem válidas,
+                     ou None se qualquer validação falhar.
+    """
     cursor = conexao.cursor(dictionary=True)
     titulo_criptografado = criptografia(titulo)
     cursor.execute("SELECT * FROM eleitores WHERE titulo_de_eleitor = %s", (titulo_criptografado,))
@@ -29,6 +40,14 @@ def identificar_eleitor(titulo, quatro_digitos_cpf, chave):
 # Busca o eleitor no banco e valida seus dados (CPF e chave de acesso).
 
 def buscar_candidato(numero):
+    """Busca um candidato no banco de dados pelo número informado.
+
+    Args:
+        numero (int): Número do candidato a ser buscado.
+
+    Returns:
+        dict | None: Dicionário com os dados do candidato se encontrado, ou None caso contrário.
+    """
     cursor = conexao.cursor(dictionary=True)
     cursor.execute("SELECT * FROM candidatos WHERE numero_candidato = %s", (numero,))
     candidato = cursor.fetchone()
@@ -40,12 +59,29 @@ def buscar_candidato(numero):
 
 
 def registrar_voto(numero_candidato, voto_nulo):
+    """Gera o protocolo e salva o voto no banco de dados.
+
+    Args:
+        numero_candidato (str): Número do candidato votado, ou None para voto nulo.
+        voto_nulo (bool): True se o voto for nulo, False caso contrário.
+
+    Returns:
+        str: Protocolo de votação em texto claro para exibição ao eleitor.
+    """
     protocolo, protocolo_criptografado = protocolo_votacao.gerar_protocolo(numero_candidato)
     protocolo_votacao.salvar_protocolo(protocolo_criptografado, numero_candidato, voto_nulo)
     return protocolo
 # Registra o voto no banco de dados com protocolo criptografado.
 
 def marcar_como_votou(id_eleitor):
+    """Atualiza o campo confirmacao_de_voto do eleitor para TRUE no banco de dados.
+
+    Args:
+        id_eleitor (int): Identificador único do eleitor na tabela eleitores.
+
+    Returns:
+        None
+    """
     cursor = conexao.cursor()
     cursor.execute(
         "UPDATE eleitores SET confirmacao_de_voto = TRUE WHERE id_eleitores = %s",
@@ -56,6 +92,14 @@ def marcar_como_votou(id_eleitor):
 # Atualiza o status do eleitor para indicar que ele já votou.
 
 def votar():
+    """Conduz o fluxo completo de votação de um eleitor.
+
+    Coleta e valida as credenciais do eleitor, verifica se já votou, permite
+    escolher o candidato, solicita confirmação e registra o voto com protocolo.
+
+    Returns:
+        int | None: Retorna 1 após voto registrado com sucesso, ou None em caso de falha na identificação.
+    """
     print("\n--- Identificacao do Eleitor ---")
     titulo = input("Titulo de eleitor: ")
     quatro_digitos = input("4 primeiros digitos do CPF: ")

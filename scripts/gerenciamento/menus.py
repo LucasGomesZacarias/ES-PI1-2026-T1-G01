@@ -10,19 +10,36 @@ from gerenciamento import listarEleitor
 from gerenciamento import cadastroCandidato, listar_candidato, deletar_candidato, buscar_candidato, editar_candidato
 from tqdm import tqdm
 from colorama import Fore, Back, Style, init
-
+import rich
 # separar submenus e munu principal em arquivos diferentes, para não ficar tão grande e confuso.
+def header():
+    """Exibe o cabeçalho padrão do sistema de eleições no terminal.
+
+    Returns:
+        None
+    """
+    rich.print ("|==========================================\n|        ELEIÇÕES[blue]PUC[/blue]   |   2026")
 
 def menu_principal():
-    op = 0 
+    """Exibe e gerencia o menu principal do sistema de eleições.
+
+    Apresenta as opções de Gerenciamento, Votação e encerramento do sistema.
+    Permanece em loop até que o usuário escolha encerrar.
+
+    Returns:
+        None
+    """
+    op = 0
     os.system('cls' if os.name == 'nt' else 'clear')
     while op !=3:
         try:
-            op = int(input(f"==========================================\nMenu\n\n1.0 Gerenciamento\n2.0 Votação\n3.0 Encerrar sistema\n\nEscolha sua opção:"))
+            header()
+            op = int(input(f"|==========================================\n| MENU\n|\n| 1.0 Gerenciamento\n| 2.0 Votação\n| 3.0 Encerrar sistema\n|\n|------------------------------------------\n| Escolha sua opção:"))
             match op:
                 case 1:
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    ger = int(input(f"==========================================\nMenu Gerenciamento\n\n1.0 Gerenciamento de Eleitores\n2.0 Gerenciamento de Candidatos\n3.0 Voltar ao Menu Principal\n\nEscolha sua opção:"))
+                    header()
+                    ger = int(input(f"|==========================================\n| MENU GERENCIAMENTO\n|\n| 1.0 Gerenciamento de Eleitores\n| 2.0 Gerenciamento de Candidatos\n| 3.0 Voltar ao Menu Principal\n|------------------------------------------\n| Escolha sua opção:"))
                     match ger:
                         case 1:
                             menu_gerenciamento()
@@ -81,8 +98,17 @@ def menu_principal():
             menu_principal()
 
 def menu_gerenciamento():
+    """Exibe e gerencia o submenu de gerenciamento de eleitores.
+
+    Apresenta opções para editar, listar, cadastrar, deletar e buscar eleitores,
+    além de retornar ao menu principal.
+
+    Returns:
+        None
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
-    gerele = int(input(f"==========================================\nMenu Gerenciamento de Eleitores\n\n1.0 Editar Eleitor\n2.0 Listar Eleitores\n3.0 Cadastrar Eleitor\n4.0 Deletar Eleitor\n5.0 Buscar Eleitor\n6.0 Voltar ao Menu Principal\n\nEscolha sua opção:"))
+    header()
+    gerele = int(input(f"|==========================================\n| MENU GERENCIAMENTO DE ELEITORES\n|\n| 1.0 Editar Eleitor\n| 2.0 Listar Eleitores\n| 3.0 Cadastrar Eleitor\n| 4.0 Deletar Eleitor\n| 5.0 Buscar Eleitor\n| 6.0 Voltar ao Menu Principal\n|------------------------------------------\n| Escolha sua opção:"))
     match gerele:
         case 1:
             editarEleitor.editar()
@@ -111,8 +137,17 @@ def menu_gerenciamento():
 
 
 def gerenciamento_candidato():
+    """Exibe e gerencia o submenu de gerenciamento de candidatos.
+
+    Apresenta opções para editar, listar, cadastrar, deletar e buscar candidatos,
+    além de retornar ao menu principal.
+
+    Returns:
+        None
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
-    gerele = int(input(f"==========================================\nMenu Gerenciamento de Eleitores\n\n1.0 Editar Candidato\n2.0 Listar Candidato\n3.0 Cadastrar Candidato\n4.0 Deletar Candidato\n5.0 Buscar Candidato\n6.0 Voltar ao Menu Principal\n\nEscolha sua opção:"))
+    header()
+    gerele = int(input(f"|==========================================\n| MENU GERENCIAMENTO DE CANDIDATOS\n|\n| 1.0 Editar Candidato\n| 2.0 Listar Candidato\n| 3.0 Cadastrar Candidato\n| 4.0 Deletar Candidato\n| 5.0 Buscar Candidato\n| 6.0 Voltar ao Menu Principal\n|------------------------------------------\n| Escolha sua opção:"))
     match gerele:
         case 1:
             editar_candidato.editar()

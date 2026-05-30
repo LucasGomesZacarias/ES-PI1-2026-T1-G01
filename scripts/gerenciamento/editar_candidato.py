@@ -6,7 +6,15 @@ import conexao_bd
 import rich
 
 def editar():
-    
+    """Busca um candidato e permite a edição de seus dados cadastrais.
+
+    Solicita o número do candidato para localizar o registro, então apresenta
+    opções para editar nome, partido, número do candidato ou todos os campos.
+    Aplica validações em cada campo e chama a si mesma recursivamente em caso de erro.
+
+    Returns:
+        None
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     #Conexão BD
     conexao=conexao_bd.conexao_bd()

@@ -6,12 +6,28 @@ from gerenciamento import criptografia
 from votacao import votacao_menu_principal
 
 def so_numeros(valor):
+    """Verifica se uma string contém apenas dígitos numéricos.
+
+    Args:
+        valor (str): String a ser verificada.
+
+    Returns:
+        bool: True se todos os caracteres forem dígitos, False caso contrário.
+    """
     for caractere in valor:
         if caractere not in "0123456789":
             return False
     return True
 
 def tentativa():
+    """Pergunta ao usuário se deseja tentar a autenticação novamente.
+
+    Em caso afirmativo, chama validaMesario(). Em caso negativo, retorna ao
+    menu de votação. Chama a si mesma em caso de resposta inválida.
+
+    Returns:
+        None
+    """
     novatentativa = ""
     while novatentativa not in ("SIM", "NAO", "NÃO"):
         novatentativa = input("Deseja tentar novamente (Sim/Não)").upper()
@@ -27,6 +43,15 @@ def tentativa():
 
 
 def validaMesario():
+    """Autentica um mesário verificando título, prefixo do CPF e chave de acesso.
+
+    Consulta o banco de dados para validar as credenciais fornecidas, verifica se
+    o eleitor possui perfil de mesário e, em caso de sucesso, executa a zerézima
+    e registra a abertura no log.
+
+    Returns:
+        None
+    """
     conexao=conexao_bd.conexao_bd()
     cursor = conexao.cursor(dictionary=True)
     os.system('cls' if os.name == 'nt' else 'clear')

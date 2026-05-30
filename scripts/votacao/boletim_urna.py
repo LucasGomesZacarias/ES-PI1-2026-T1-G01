@@ -2,7 +2,14 @@ import os
 import conexao_bd
 
 def boletim_urna():
+    """Exibe o boletim de urna com a contagem de votos por candidato e o vencedor.
 
+    Realiza consulta no banco de dados cruzando candidatos com votos registrados,
+    exibe os totais por candidato e destaca o candidato com maior número de votos.
+
+    Returns:
+        None
+    """
     conexao=conexao_bd.conexao_bd()
     cursor = conexao.cursor()
 

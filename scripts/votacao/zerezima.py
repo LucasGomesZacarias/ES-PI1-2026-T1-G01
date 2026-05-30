@@ -6,7 +6,16 @@ from tqdm import tqdm
 from colorama import Fore, Back, Style, init
 
 
-def zerezima ():
+def zerezima():
+    """Executa a zerézima: zera todos os votos e reinicia o estado da eleição.
+
+    Apaga todos os registros da tabela de votação, redefine confirmacao_de_voto
+    de todos os eleitores para FALSE e limpa o arquivo de log de ocorrências.
+    Exibe os candidatos com zero votos após a operação.
+
+    Returns:
+        int: Retorna 1 após a conclusão bem-sucedida da zerézima.
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
     for i in tqdm(range(100), desc= 'EXECUTANDO ZERÉZIMA' , bar_format="{l_bar}%s{bar}%s{r_bar}" % (Style.BRIGHT + Fore.GREEN, Fore.RESET)):
         time.sleep(0.04)

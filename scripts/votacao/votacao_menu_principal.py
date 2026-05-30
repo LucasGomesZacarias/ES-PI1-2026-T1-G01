@@ -2,12 +2,30 @@ import os
 import time
 from votacao import votacao_submenus
 from gerenciamento import menus
+import rich
+
+def header():
+    """Exibe o cabeçalho padrão do sistema de eleições no terminal.
+
+    Returns:
+        None
+    """
+    rich.print ("==========================================\n        ELEIÇÕES[blue]PUC[/blue]   |   2026")
 
 def votacao_menu_principal():
+    """Exibe e gerencia o menu principal do módulo de votação.
+
+    Apresenta opções para abrir votação, acessar auditoria, ver resultados
+    e voltar ao menu principal. Permanece em loop até que o usuário volte.
+
+    Returns:
+        None
+    """
     opcao=0
     while opcao!=4:
         try:
-            opcao=int(input('==========================================\nMenu Votação\n\n1. Abrir votação\n2. Auditoria de votação\n3. Resultados da Votação\n4. Voltar\n\nEscolha uma opção: '))
+            header()
+            opcao=int(input('==========================================\n| MENU VOTAÇÃO\n|\n| 1.0 Abrir votação\n| 2.0 Auditoria de votação\n| 3.0 Resultados da Votação\n| 4.0 Voltar\n|------------------------------------------\n| Escolha uma opção: '))
             match opcao:
                 case 1:
                     os.system('cls' if os.name == 'nt' else 'clear')

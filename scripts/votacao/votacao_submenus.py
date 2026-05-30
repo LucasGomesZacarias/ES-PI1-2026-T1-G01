@@ -10,6 +10,17 @@ from votacao import votos_por_partido
 from votacao import validacao_integridade
 
 def abrir_votacao(valida):
+    """Gerencia o submenu de votação aberta, incluindo registro de votos e encerramento.
+
+    Autentica o mesário na primeira abertura (valida == 0) e apresenta opções
+    para registrar votos ou encerrar a votação.
+
+    Args:
+        valida (int): 0 para exigir autenticação do mesário, 1 para pular autenticação.
+
+    Returns:
+        None
+    """
     if valida == 0:
         valida=autenticacao_mesario.validaMesario()
 
@@ -50,6 +61,14 @@ def abrir_votacao(valida):
 
 
 def auditoria_votacao():
+    """Exibe e gerencia o submenu de auditoria da votação.
+
+    Apresenta opções para exibir logs de ocorrências e listar protocolos de votação.
+    Permanece em loop até que o usuário volte ao menu anterior.
+
+    Returns:
+        None
+    """
     opcao=0
     while opcao!=3:
         try:
@@ -89,6 +108,14 @@ def auditoria_votacao():
 
 
 def resultados_votacao():
+    """Exibe e gerencia o submenu de resultados da votação.
+
+    Apresenta opções para visualizar boletim de urna, estatísticas de comparecimento,
+    votos por partido e validação de integridade dos dados.
+
+    Returns:
+        None
+    """
     opcao=0
     while opcao!=3:
         try:

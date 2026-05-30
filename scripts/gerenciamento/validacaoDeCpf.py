@@ -1,4 +1,12 @@
 def validaCpf(cpf):
+    """Valida um CPF verificando os dois dígitos verificadores.
+
+    Args:
+        cpf (str): String contendo os 11 dígitos do CPF sem formatação.
+
+    Returns:
+        bool: True se o CPF for válido, False caso contrário.
+    """
     if len(set(cpf)) == 1:
         return False
 
